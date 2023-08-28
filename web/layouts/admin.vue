@@ -61,7 +61,7 @@ const showProfileMenu = ref(true)
                                     <ul role="list" class="-mx-2 space-y-1">
                                         <li>
                                             <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                                            <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                     <path
                                                         stroke-linecap="round"
@@ -73,7 +73,7 @@ const showProfileMenu = ref(true)
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="bg-gray-800 text-white group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <a href="javascript://" class="bg-gray-800 text-white group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                     <path
                                                         stroke-linecap="round"
@@ -85,7 +85,7 @@ const showProfileMenu = ref(true)
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                     <path
                                                         stroke-linecap="round"
@@ -97,7 +97,7 @@ const showProfileMenu = ref(true)
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                     <path
                                                         stroke-linecap="round"
@@ -109,7 +109,7 @@ const showProfileMenu = ref(true)
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                     <path
                                                         stroke-linecap="round"
@@ -121,7 +121,7 @@ const showProfileMenu = ref(true)
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                     <path
                                                         stroke-linecap="round"
@@ -140,19 +140,19 @@ const showProfileMenu = ref(true)
                                     <ul role="list" class="-mx-2 mt-2 space-y-1">
                                         <li>
                                             <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                                            <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">P</span>
                                                 <span class="truncate">Planetaria</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">P</span>
                                                 <span class="truncate">Protocol</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">T</span>
                                                 <span class="truncate">Tailwind Labs</span>
                                             </a>
@@ -160,7 +160,7 @@ const showProfileMenu = ref(true)
                                     </ul>
                                 </li>
                                 <li class="-mx-6 mt-auto">
-                                    <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
+                                    <a href="javascript://" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
                                         <img
                                             class="h-8 w-8 rounded-full bg-gray-800"
                                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -190,7 +190,7 @@ const showProfileMenu = ref(true)
                             <ul role="list" class="-mx-2 space-y-1">
                                 <li>
                                     <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                                    <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                             <path
                                                 stroke-linecap="round"
@@ -202,7 +202,7 @@ const showProfileMenu = ref(true)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="bg-gray-800 text-white group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <a href="javascript://" class="bg-gray-800 text-white group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                             <path
                                                 stroke-linecap="round"
@@ -214,7 +214,7 @@ const showProfileMenu = ref(true)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                             <path
                                                 stroke-linecap="round"
@@ -226,7 +226,7 @@ const showProfileMenu = ref(true)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                             <path
                                                 stroke-linecap="round"
@@ -238,7 +238,7 @@ const showProfileMenu = ref(true)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                             <path
                                                 stroke-linecap="round"
@@ -250,7 +250,7 @@ const showProfileMenu = ref(true)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                             <path
                                                 stroke-linecap="round"
@@ -269,19 +269,19 @@ const showProfileMenu = ref(true)
                             <ul role="list" class="-mx-2 mt-2 space-y-1">
                                 <li>
                                     <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                                    <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">P</span>
                                         <span class="truncate">Planetaria</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">P</span>
                                         <span class="truncate">Protocol</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <a href="javascript://" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">T</span>
                                         <span class="truncate">Tailwind Labs</span>
                                     </a>
@@ -289,7 +289,7 @@ const showProfileMenu = ref(true)
                             </ul>
                         </li>
                         <li class="-mx-6 mt-auto">
-                            <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
+                            <a href="javascript://" class="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800">
                                 <img
                                     class="h-8 w-8 rounded-full bg-gray-800"
                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -319,7 +319,7 @@ const showProfileMenu = ref(true)
                 </button>
 
                 <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-                    <form class="flex flex-1" action="#" method="GET">
+                    <form class="flex flex-1" action="javascript://" method="GET">
                         <label for="search-field" class="sr-only">Search</label>
                         <div class="relative w-full">
                             <svg class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -366,9 +366,9 @@ const showProfileMenu = ref(true)
                             tabindex="-1"
                         >
                             <!-- Active: "bg-gray-50", Not Active: "" -->
-                            <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="sort-menu-item-0">Name</a>
-                            <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="sort-menu-item-1">Date updated</a>
-                            <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="sort-menu-item-2">Environment</a>
+                            <a href="javascript://" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="sort-menu-item-0">Name</a>
+                            <a href="javascript://" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="sort-menu-item-1">Date updated</a>
+                            <a href="javascript://" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="sort-menu-item-2">Environment</a>
                         </div>
                     </div>
                 </header>
@@ -382,7 +382,7 @@ const showProfileMenu = ref(true)
                                     <div class="h-2 w-2 rounded-full bg-current"></div>
                                 </div>
                                 <h2 class="min-w-0 text-sm font-semibold leading-6 text-white">
-                                    <a href="#" class="flex gap-x-2">
+                                    <a href="javascript://" class="flex gap-x-2">
                                         <span class="truncate">Planetaria</span>
                                         <span class="text-gray-400">/</span>
                                         <span class="whitespace-nowrap">ios-app</span>
@@ -412,7 +412,7 @@ const showProfileMenu = ref(true)
             <aside class="bg-black/10 lg:fixed lg:bottom-0 lg:right-0 lg:top-16 lg:w-96 lg:overflow-y-auto lg:border-l lg:border-white/5">
                 <header class="flex items-center justify-between border-b border-white/5 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
                     <h2 class="text-base font-semibold leading-7 text-white">Activity feed</h2>
-                    <a href="#" class="text-sm font-semibold leading-6 text-indigo-400">View all</a>
+                    <a href="javascript://" class="text-sm font-semibold leading-6 text-indigo-400">View all</a>
                 </header>
                 <ul role="list" class="divide-y divide-white/5">
                     <li class="px-4 py-4 sm:px-6 lg:px-8">
