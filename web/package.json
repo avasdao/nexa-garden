@@ -1,6 +1,6 @@
 {
-  "name": "nexa-garden-web",
-  "version": "23.1.21",
+  "name": "nexa-garden",
+  "version": "23.8.28",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -9,7 +9,14 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "dependencies": {
+    "@pinia/nuxt": "0.4.7",
+    "nexajs": "23.8.21",
+    "nuxt": "3.0.0",
+    "pinia": "2.0.32"
+  },
   "devDependencies": {
-    "nuxt": "3.0.0"
+    "@nuxtjs/i18n": "8.0.0-rc.2",
+    "@nuxtjs/tailwindcss": "6.4.1"
   }
 }
