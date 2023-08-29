@@ -25,7 +25,13 @@ export default defineEventHandler(async (event) => {
     let assetPkg
 
     /* Initialize Formidable library. */
-    form = formidable({ multiples: true })
+    form = formidable({
+        uploadDir: process.env.UPLOAD_DIR || '/tmp',
+        maxFieldsSize: 1 * 1024 * 1024, // NOTE: 1MiB
+        maxFileSize: 2 * 1024 * 1024, // NOTE: 2MiB
+        maxTotalFileSize: 50 * 1024 * 1024, // NOTE: 50MiB
+        multiples: true,
+    })
     // form = formidable()
 
     response = await form.parse(event.node.req)
@@ -36,7 +42,7 @@ export default defineEventHandler(async (event) => {
         return null
     }
 
-    return response[0]
+    return response
 
     campaign = body.campaign
     campaignid = campaign.id
