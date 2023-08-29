@@ -1,6 +1,6 @@
 {
   "name": "nexa-garden",
-  "version": "23.8.28",
+  "version": "23.8.29",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -11,9 +11,14 @@
   },
   "dependencies": {
     "@pinia/nuxt": "0.4.7",
+    "formidable": "3.5.1",
+    "moment": "2.29.4",
     "nexajs": "23.8.21",
+    "numeral": "2.0.6",
     "nuxt": "3.0.0",
-    "pinia": "2.0.32"
+    "pinia": "2.0.32",
+    "pouchdb": "8.0.1",
+    "uuid": "9.0.0"
   },
   "devDependencies": {
     "@nuxtjs/i18n": "8.0.0-rc.2",
