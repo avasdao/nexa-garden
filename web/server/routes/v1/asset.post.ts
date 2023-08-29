@@ -18,21 +18,24 @@ export default defineEventHandler(async (event) => {
     let fields
     let files
     let form
+    let options
     let profiles
     let receivers
     let response
     let txidem
     let assetPkg
 
-    /* Initialize Formidable library. */
-    form = formidable({
+    options = {
         uploadDir: process.env.UPLOAD_DIR || '/tmp',
         maxFieldsSize: 1 * 1024 * 1024, // NOTE: 1MiB
         maxFileSize: 2 * 1024 * 1024, // NOTE: 2MiB
         maxTotalFileSize: 50 * 1024 * 1024, // NOTE: 50MiB
         multiples: true,
-    })
-    // form = formidable()
+    }
+    console.log('FORMIDABLE OPTIONS', options)
+
+    /* Initialize Formidable library. */
+    form = formidable(options)
 
     response = await form.parse(event.node.req)
         .catch(err => console.error(err))
