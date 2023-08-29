@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
     let assetPkg
 
     options = {
-        uploadDir: process.env.UPLOAD_DIR || '/tmp',
+        uploadDir: '/export',
         maxFieldsSize: 1 * 1024 * 1024, // NOTE: 1MiB
         maxFileSize: 2 * 1024 * 1024, // NOTE: 2MiB
         maxTotalFileSize: 50 * 1024 * 1024, // NOTE: 50MiB

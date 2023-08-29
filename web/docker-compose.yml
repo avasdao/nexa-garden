@@ -18,7 +18,8 @@ services:
       - PROJECT_ID=${PROJECT_ID}
       - PROJECT_NAME=${PROJECT_NAME}
       - PROJECT_MNEMONIC=${PROJECT_MNEMONIC}
-      - UPLOAD_DIR=${UPLOAD_DIR}
+    volumes:
+        - ${IPFS_STAGING}:/export
   couchdb:
     image: couchdb
     restart: always
