@@ -7,11 +7,11 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Nexa Garden',
-  tagline: 'Your guide to Crypto Crowdfunding your next BIG idea!',
+  tagline: 'Manage your On-chain Assets with total confidence!',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://causes.cash',
+  url: 'https://nexa.garden',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -36,7 +36,7 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/avasdao/causes-cash',
+            'https://github.com/avasdao/nexa-garden',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -64,7 +64,7 @@ const config = {
             label: 'Tutorial',
           },
           {
-            href: 'https://github.com/avasdao/causes-cash',
+            href: 'https://github.com/avasdao/nexa-garden',
             label: 'GitHub',
             position: 'right',
           },
@@ -95,7 +95,7 @@ const config = {
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/0xShomari',
+                href: 'https://twitter.com/AvasDAO',
               },
             ],
           },
@@ -104,7 +104,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/avasdao/causes-cash',
+                href: 'https://github.com/avasdao/nexa-garden',
               },
             ],
           },
