@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Nexa Garden',
+  title: 'Nexa Garden Docs',
   tagline: 'Manage your On-chain Assets with total confidence!',
   favicon: 'img/favicon.ico',
 
