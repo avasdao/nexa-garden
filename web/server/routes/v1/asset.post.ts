@@ -32,14 +32,14 @@ export default defineEventHandler(async (event) => {
         maxTotalFileSize: 50 * 1024 * 1024, // NOTE: 50MiB
         multiples: true,
     }
-    console.log('FORMIDABLE OPTIONS', options)
+    // console.log('FORMIDABLE OPTIONS', options)
 
     /* Initialize Formidable library. */
     form = formidable(options)
 
     response = await form.parse(event.node.req)
         .catch(err => console.error(err))
-    console.log('RESPONSE', response)
+    // console.log('RESPONSE', response)
 
     if (!response?.length) {
         return null

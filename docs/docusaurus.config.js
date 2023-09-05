@@ -6,18 +6,18 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Nexa Garden Docs',
-  tagline: 'Radicle repository for FOSS projects.',
-  url: 'https://nexa.garden',
-  baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  title: 'Nexa Garden',
+  tagline: 'Your guide to Crypto Crowdfunding your next BIG idea!',
   favicon: 'img/favicon.ico',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  // Set the production url of your site here
+  url: 'https://causes.cash',
+  // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
+  baseUrl: '/',
+
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -33,19 +33,14 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/avasdao/causes-cash',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
+        // blog: {
+        //   showReadingTime: true,
+        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -56,8 +51,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Replace with your project's social card
+      image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Nexa Garden Docs',
+        title: 'Nexa Garden',
         logo: {
           alt: 'Nexa Garden Logo',
           src: 'img/logo.svg',
@@ -71,7 +68,7 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/avasdao/nexa-garden',
+            href: 'https://github.com/avasdao/causes-cash',
             label: 'GitHub',
             position: 'right',
           },
@@ -85,7 +82,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/intro',
+                to: '/intro',
               },
             ],
           },
@@ -115,7 +112,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/avasdao/nexa-garden',
+                href: 'https://github.com/avasdao/causes-cash',
               },
             ],
           },

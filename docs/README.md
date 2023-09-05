@@ -1,3 +1,1 @@
-# Nexa Garden Docs
-
-### https://docs.nexa.garden
+# Welcome to the Documentation
