@@ -1,6 +1,6 @@
 {
   "name": "nexa-garden",
-  "version": "23.8.30",
+  "version": "23.9.13",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "0.4.7",
+    "fflate": "0.8.0",
     "formidable": "3.5.1",
     "helia": "2.0.1",
     "moment": "2.29.4",
