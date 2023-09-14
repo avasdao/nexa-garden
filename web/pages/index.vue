@@ -1,16 +1,44 @@
 <script setup lang="ts">
 
+const isFan = ref(false)
+
+if (process.client) {
+    /* Verify the URL (location), for security reasons. */
+    const myLocation = document.location
+    console.log('MY LOCATION', myLocation)
+
+    /* Set location hash. */
+    const hash = myLocation.hash // #/3f080076-d30b-4d32-b51a-120ae63f6905
+    console.log('HASH', hash)
+
+    /* Set location hostname. */
+    const hostname = myLocation.hostname // localhost
+    console.log('HOSTNAME', hostname)
+
+    /* Detect all mirrors. */
+    if (hostname === 'nexa.fan') {
+        /* Set flag. */
+        isFan.value = true
+    }
+}
 
 </script>
 
 <template>
     <div class="bg-green-900">
+        <h2>
+            IsFan: {{ isFan }}
+        </h2>
+
         <main>
             <Hero />
 
             <!-- Logo cloud -->
             <div class="mx-auto mt-8 max-w-7xl px-6 sm:mt-16 lg:px-8">
-                <h2 class="text-center text-lg font-semibold leading-8 text-white">The world’s most innovative companies use our app</h2>
+                <h2 class="text-center text-lg font-semibold leading-8 text-white">
+                    The world’s most innovative companies use our app
+                </h2>
+
                 <div class="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
                     <img class="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindui.com/img/logos/158x48/transistor-logo-white.svg" alt="Transistor" width="158" height="48" />
                     <img class="col-span-2 max-h-12 w-full object-contain lg:col-span-1" src="https://tailwindui.com/img/logos/158x48/reform-logo-white.svg" alt="Reform" width="158" height="48" />
