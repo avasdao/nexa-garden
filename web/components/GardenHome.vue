@@ -19,7 +19,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <main>
+    <main class="bg-green-900">
         <Hero />
 
         <!-- Logo cloud -->
@@ -286,5 +286,7 @@ const props = defineProps({
                 </div>
             </div>
         </div>
+
+        <Footer />
     </main>
 </template>

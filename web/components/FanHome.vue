@@ -19,9 +19,11 @@ const props = defineProps({
 </script>
 
 <template>
-    <main class="">
+    <main class="bg-lime-600 py-32">
         <h1 class="">
             Fan Home
         </h1>
+
+        <Footer />
     </main>
 </template>
