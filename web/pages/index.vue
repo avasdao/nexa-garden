@@ -1,11 +1,4 @@
 <script setup lang="ts">
-useHead({
-    title: `Nexa Garden`,
-    meta: [
-        { name: 'description', content: `Nexa Garden makes building your next BIG idea effortless.` }
-    ],
-})
-
 /* Initialize stores. */
 // import { useSystemStore } from '@/stores/system'
 // const System = useSystemStore()

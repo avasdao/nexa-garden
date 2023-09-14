@@ -1,10 +1,9 @@
 <script setup lang="ts">
-/* Define properties. */
-// https://vuejs.org/guide/components/props.html#props-declaration
-const props = defineProps({
-    data: {
-        type: [Object],
-    },
+useHead({
+    title: `Nexa Garden`,
+    meta: [
+        { name: 'description', content: `Nexa Garden makes building your next BIG idea effortless.` }
+    ],
 })
 
 // onMounted(() => {
