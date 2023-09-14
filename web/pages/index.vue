@@ -31,7 +31,7 @@ onBeforeMount(() => {
         console.log('HOSTNAME', hostname)
 
         /* Detect all mirrors. */
-        if (hostname !== 'nexa.fan') {
+        if (hostname === 'nexa.fan') {
             /* Set flag. */
             isFan.value = true
         } else {
