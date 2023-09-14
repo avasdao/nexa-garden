@@ -60,9 +60,9 @@ const props = defineProps({
             ></div>
         </div>
 
-        <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-40 lg:flex lg:px-8 lg:pt-40">
+        <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-40 lg:flex lg:px-8 lg:pt-16">
             <div class="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
-                <img class="h-11" src="https://tailwindui.com/img/logos/mark.svg?color=lime&shade=500" alt="Your Company" />
+                <img class="w-24 h-auto" src="~/assets/icon.png" alt="Nexa Garden" />
 
                 <div class="mt-24 sm:mt-32 lg:mt-16">
                     <a href="javascript://" class="inline-flex space-x-6">
@@ -92,12 +92,11 @@ const props = defineProps({
                 </p>
 
                 <div class="mt-10 flex items-center gap-x-6">
-                    <a
-                        href="javascript://"
+                    <NuxtLink to="/upload"
                         class="rounded-md bg-lime-600 px-3.5 py-2.5 text-2xl font-semibold text-lime-100 shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400"
                     >
                         Start Uploading...
-                    </a>
+                    </NuxtLink>
 
                     <a href="javascript://" class="text-xl font-semibold leading-6 text-lime-50 hover:text-lime-300">
                         Watch a demo <span aria-hidden="true">→</span>

@@ -24,10 +24,10 @@ const isShowingMenu = ref(false)
     <header class="absolute inset-x-0 top-0 z-50">
         <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
             <div class="flex lg:flex-1">
-                <a href="javascript://" class="-m-1.5 p-1.5">
-                    <span class="sr-only">PROJECT_NAME</span>
-                    <img class="h-16 w-auto" src="~/assets/nexa.svg" alt="" />
-                </a>
+                <NuxtLink to="/" class="-m-1.5 p-1.5">
+                    <span class="sr-only">Nexa Garden</span>
+                    <img class="h-16 w-auto" src="~/assets/icon.png" alt="" />
+                </NuxtLink>
             </div>
             <div class="flex lg:hidden">
                 <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
