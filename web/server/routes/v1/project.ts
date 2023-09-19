@@ -1,3 +1,5 @@
+console.log('Loading project...')
+
 export default defineEventHandler((event) => {
     const projectid = process.env.PROJECT_ID
     const projectName = process.env.PROJECT_NAME

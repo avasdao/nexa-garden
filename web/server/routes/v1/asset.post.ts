@@ -1,3 +1,5 @@
+console.log('Loading asset...')
+
 /* Import modules. */
 import formidable from 'formidable'
 import { createHelia } from 'helia'
