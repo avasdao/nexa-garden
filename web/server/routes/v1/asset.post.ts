@@ -1,7 +1,6 @@
-console.log('Loading asset...')
-
 /* Import modules. */
 import formidable from 'formidable'
+import fs from 'fs'
 // import { createHelia } from 'helia'
 // import { unixfs } from '@helia/unixfs'
 // import { FsBlockstore } from 'blockstore-fs'
@@ -68,6 +67,37 @@ const getPin = async (_cid) => {
 }
 
 const doPin = async (_data) => {
+
+    const pipePath = "/gateway/pipe"
+    const outputPath = "/gateway/output"
+    const commandToRun = "pwd && ls-l"
+
+    console.log("delete previous output")
+    if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath)
+
+    console.log("writing to pipe...")
+    const wstream = fs.createWriteStream(pipePath)
+    wstream.write(commandToRun)
+    wstream.close()
+
+    console.log("waiting for output.txt...") //there are better ways to do that than setInterval
+    let timeout = 10000 //stop waiting after 10 seconds (something might be wrong)
+    const timeoutStart = Date.now()
+    const myLoop = setInterval(function () {
+        if (Date.now() - timeoutStart > timeout) {
+            clearInterval(myLoop);
+            console.log("timed out")
+        } else {
+            //if output.txt exists, read it
+            if (fs.existsSync(outputPath)) {
+                clearInterval(myLoop);
+                const data = fs.readFileSync(outputPath).toString()
+                if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath) //delete the output file
+                console.log(data) //log the output of the command
+            }
+        }
+    }, 300);
+
     // const fs = unixfs(helia)
     // // console.log('FS', fs);
 
