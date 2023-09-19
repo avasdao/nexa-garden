@@ -70,7 +70,7 @@ const doPin = async (_data) => {
 
     const pipePath = "/gateway/pipe"
     const outputPath = "/gateway/output"
-    const commandToRun = "pwd && ls-l"
+    const commandToRun = "pwd && ls -l"
 
     console.log("delete previous output")
     if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath)
@@ -80,7 +80,7 @@ const doPin = async (_data) => {
     wstream.write(commandToRun)
     wstream.close()
 
-    console.log("waiting for output.txt...") //there are better ways to do that than setInterval
+    console.log("waiting for output...") //there are better ways to do that than setInterval
     let timeout = 10000 //stop waiting after 10 seconds (something might be wrong)
     const timeoutStart = Date.now()
     const myLoop = setInterval(function () {
