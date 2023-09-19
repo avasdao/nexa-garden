@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/* Import modules. */
+import numeral from 'numeral'
+
 useHead({
     title: `Pricing — Nexa Garden`,
     meta: [
@@ -10,10 +13,26 @@ useHead({
 import { useSystemStore } from '@/stores/system'
 const System = useSystemStore()
 
-// onMounted(() => {
-//     console.log('Mounted!')
-//     // Now it's safe to perform setup operations.
-// })
+const GIB_DAILY_RATE_IN_USD = 0.005
+
+const usd = ref(null)
+
+const rateInNexa = computed(() => {
+    if (!usd.value) {
+        return 0
+    }
+
+    return numeral(usd.value / GIB_DAILY_RATE_IN_USD).format('0,0.00')
+})
+
+const init = async () => {
+    usd.value = await $fetch('https://nexa.exchange/mex')
+        .catch(err => console.error(err))
+}
+
+onMounted(() => {
+    init()
+})
 
 // onBeforeUnmount(() => {
 //     console.log('Before Unmount!')
@@ -101,16 +120,21 @@ const System = useSystemStore()
                             </p>
 
                             <p class="mt-6 flex flex-col items-end justify-center gap-x-2">
-                                <span class="flex justify-start text-5xl font-bold tracking-tight text-gray-900">
-                                    <sup class="mt-2 text-xs text-gray-400">
+                                <span class="flex justify-start text-5xl font-bold tracking-tight text-lime-600">
+                                    <sup class="mt-2 text-xs text-gray-400 tracking-wide">
                                         USD
                                     </sup>
 
                                     $0.005
                                 </span>
 
-                                <span class="text-sm font-semibold leading-6 tracking-wide text-gray-500">
+                                <span class="text-sm font-semibold leading-6 tracking-wide text-amber-600">
                                     per GiB each Day
+                                </span>
+
+                                <span v-if="rateInNexa" class="text-base font-semibold leading-6 tracking-wide text-lime-600">
+                                    {{rateInNexa}}
+                                    <span class="text-xs text-gray-400">NEXA</span>
                                 </span>
                             </p>
 
