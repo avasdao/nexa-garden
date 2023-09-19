@@ -17,9 +17,9 @@ const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COU
 /* Initialize (global) Helia. */
 let helia
 
-// console.log('process.env.HELIA_DIR', process.env.HELIA_DIR)
-// const blockstore = new FsBlockstore(process.env.HELIA_DIR)
-// console.log('blockstore', blockstore)
+console.log('process.env.HELIA_DIR', process.env.HELIA_DIR)
+const blockstore = new FsBlockstore(process.env.HELIA_DIR)
+console.log('blockstore', blockstore)
 
 // const heliaOptions = {
 //     libp2p: createLibp2p({
@@ -36,57 +36,57 @@ let helia
 //     })
 // }
 
-// const init = async () => {
-//     helia = await createHelia({
-//         blockstore,
-//     })
-//     console.log('helia', helia)
+const init = async () => {
+    helia = await createHelia({
+        blockstore,
+    })
+    console.log('helia', helia)
 
-//     // await helia.stop()
-// }
+    // await helia.stop()
+}
 
-// const cleanup = async () => {
-//     await helia.stop()
-// }
+const cleanup = async () => {
+    await helia.stop()
+}
 
-// const getPin = async (_cid) => {
-//     const fs = unixfs(helia)
-//     // console.log('FS', fs);
+const getPin = async (_cid) => {
+    const fs = unixfs(helia)
+    // console.log('FS', fs);
 
-//     const decoder = new TextDecoder()
-//     let text = ''
+    const decoder = new TextDecoder()
+    let text = ''
 
-//     for await (const chunk of fs.cat(_cid)) {
-//         text += decoder.decode(chunk, {
-//             stream: true
-//         })
-//     }
+    for await (const chunk of fs.cat(_cid)) {
+        text += decoder.decode(chunk, {
+            stream: true
+        })
+    }
 
-//     console.log('Added file contents:', text)
+    console.log('Added file contents:', text)
 
-//     return text
-// }
+    return text
+}
 
-// const doPin = async (_data) => {
-//     const fs = unixfs(helia)
-//     // console.log('FS', fs);
+const doPin = async (_data) => {
+    const fs = unixfs(helia)
+    // console.log('FS', fs);
 
-//     const directoryCid = await fs.addDirectory()
-//     console.log('DIR', directoryCid)
+    const directoryCid = await fs.addDirectory()
+    console.log('DIR', directoryCid)
 
-//     // we will use this TextEncoder to turn strings into Uint8Arrays
-//     const encoder = new TextEncoder()
-//     const bytes = encoder.encode('Hello World 201')
+    // we will use this TextEncoder to turn strings into Uint8Arrays
+    const encoder = new TextEncoder()
+    const bytes = encoder.encode('Hello World 201')
 
-//     // add the bytes to your node and receive a unique content identifier
-//     const cid = await fs.addBytes(bytes)
-//     console.log('Added file:', cid.toString())
+    // add the bytes to your node and receive a unique content identifier
+    const cid = await fs.addBytes(bytes)
+    console.log('Added file:', cid.toString())
 
-//     const updatedCid = await fs.cp(cid, directoryCid, 'foo.txt')
-//     console.info(updatedCid)
+    const updatedCid = await fs.cp(cid, directoryCid, 'foo.txt')
+    console.info(updatedCid)
 
-//     return cid
-// }
+    return cid
+}
 
 // init()
 
@@ -108,7 +108,7 @@ export default defineEventHandler(async (event) => {
     let txidem
     let assetPkg
 
-    return 'working!'
+    return 'working 2'
 
     options = {
         uploadDir: process.env.UPLOAD_DIR,
