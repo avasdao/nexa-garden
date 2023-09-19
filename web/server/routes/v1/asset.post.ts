@@ -38,7 +38,7 @@ console.log('blockstore', blockstore)
 
 const init = async () => {
     helia = await createHelia({
-        blockstore,
+        // blockstore,
     })
     console.log('helia', helia)
 
