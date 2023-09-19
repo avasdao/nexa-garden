@@ -15,11 +15,11 @@ services:
         max-file: '5'
         max-size: '10m'
     environment:
-      - HELIA_DATA=/helia
+      - HELIA_DIR=/helia
       - UPLOAD_DIR=/uploads
       - MNEMONIC=${MNEMONIC}
     volumes:
-        - ${HELIA_DATA}:/helia
+        - ${HELIA_DIR}:/helia
         - ${UPLOAD_DIR}:/uploads
         # WARNING This is very dangerous, as it gives 100% control over the host machine's Docker instance.
         #         However, this is the "preferred" way to execute CLI on another container.

@@ -15,7 +15,7 @@ const rainmakerTxsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process
 /* Initialize (global) Helia. */
 let helia
 
-const blockstore = new FsBlockstore(process.env.HELIA_DATA)
+const blockstore = new FsBlockstore(process.env.HELIA_DIR)
 
 // const heliaOptions = {
 //     libp2p: createLibp2p({
