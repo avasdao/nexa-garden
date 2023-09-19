@@ -88,7 +88,7 @@ const doPin = async (_data) => {
     return cid
 }
 
-// init()
+init()
 
 
 export default defineEventHandler(async (event) => {
