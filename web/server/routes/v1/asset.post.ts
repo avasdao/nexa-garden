@@ -1,16 +1,16 @@
 console.log('Loading asset...')
 
 /* Import modules. */
-// import formidable from 'formidable'
-// import { createHelia } from 'helia'
-// import { unixfs } from '@helia/unixfs'
-// import { FsBlockstore } from 'blockstore-fs'
-// import moment from 'moment'
-// import PouchDB from 'pouchdb'
-// import { sha256 } from '@nexajs/crypto'
+import formidable from 'formidable'
+import { createHelia } from 'helia'
+import { unixfs } from '@helia/unixfs'
+import { FsBlockstore } from 'blockstore-fs'
+import moment from 'moment'
+import PouchDB from 'pouchdb'
+import { sha256 } from '@nexajs/crypto'
 
 /* Initialize databases. */
-// const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
+const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 // const rainmakerProfilesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/rainmaker_profiles`)
 // const rainmakerTxsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/rainmaker_txs`)
 

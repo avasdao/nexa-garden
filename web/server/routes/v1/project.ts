@@ -1,8 +1,6 @@
-console.log('Loading project...')
-
 export default defineEventHandler((event) => {
-    const projectid = process.env.PROJECT_ID
-    const projectName = process.env.PROJECT_NAME
+    const projectid = process.env.HELIA_DIR
+    const projectName = process.env.UPLOAD_DIR
 
     /* Build project. */
     const project = {
