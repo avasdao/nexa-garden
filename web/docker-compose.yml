@@ -19,12 +19,12 @@ services:
       - UPLOAD_DIR=/uploads
       - MNEMONIC=${MNEMONIC}
     volumes:
-        - ${HELIA_DIR}:/helia
+        # - ${HELIA_DIR}:/helia
         - ${UPLOAD_DIR}:/uploads
         # WARNING This is very dangerous, as it gives 100% control over the host machine's Docker instance.
         #         However, this is the "preferred" way to execute CLI on another container.
         #         (source: https://nathanleclaire.com/blog/2014/07/12/10-docker-tips-and-tricks-that-will-make-you-sing-a-whale-song-of-joy/)
-        # - '/var/run/docker.sock:/var/run/docker.sock'
+        - '/var/run/docker.sock:/var/run/docker.sock'
   couchdb:
     image: couchdb
     restart: always
