@@ -108,8 +108,6 @@ export default defineEventHandler(async (event) => {
     let txidem
     let assetPkg
 
-    return 'working 2'
-
     options = {
         uploadDir: process.env.UPLOAD_DIR,
         maxFieldsSize: 1 * 1024 * 1024,         //   1 MiB
