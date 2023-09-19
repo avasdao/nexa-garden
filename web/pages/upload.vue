@@ -13,9 +13,11 @@ import { useSystemStore } from '@/stores/system'
 const System = useSystemStore()
 
 const ENDPOINT = 'https://nexa.garden/v1/asset'
+// const ENDPOINT = 'http://localhost:9393/v1/asset'
 
 const imagePreviewUrl = ref(null)
 const imageData = ref(null)
+const response = ref(null)
 
 
 const handleChange = async (e) => {
@@ -42,24 +44,21 @@ const upload = async () => {
         return alert(`Oops! You must select a file to upload.`)
     }
 
-    /* Initialize locals. */
-    let response
-
     let formData = new FormData()
 
     formData.append('name', imageData.value?.name)
 
     formData.append('hi', 'there!')
-    formData.append('hi', 'again...')
+    formData.append('merhaba', 'kadin!')
 
-    formData.append('images[0]', imageData.value)
+    formData.append('data', imageData.value)
 
-    response = await $fetch(ENDPOINT, {
+    response.value = await $fetch(ENDPOINT, {
         method: 'POST',
         body: formData,
     })
     .catch(err => console.error(err))
-    console.log('RESPONSE (upload):', response)
+    console.log('RESPONSE (upload):', response.value)
 }
 
 // onMounted(() => {
@@ -74,7 +73,7 @@ const upload = async () => {
 </script>
 
 <template>
-    <main class="max-w-7xl mx-auto py-5">
+    <main class="max-w-7xl mx-auto py-5 flex flex-col">
         <h1 class="text-5xl font-medium">
             Upload
         </h1>
@@ -90,6 +89,15 @@ const upload = async () => {
             @change="handleChange"
             class="bg-rose-500 text-2xl"
         />
+
+        <input
+            type="text"
+            placeholder="Enter number of days"
+        />
+
+        <div v-if="response" class="mx-5 my-2 px-3 py-1 bg-rose-300 border border-rose-500 rounded-lg shadow">
+            <pre class="text-rose-900 font-medium">{{response}}</pre>
+        </div>
 
         <div class="mt-5 pr-6 flex items-center justify-end gap-x-6">
             <button type="button" class="text-xl font-semibold leading-6 text-gray-900">
