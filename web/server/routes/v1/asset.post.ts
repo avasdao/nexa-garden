@@ -69,9 +69,19 @@ const getPin = async (_cid) => {
 const doPin = async (_data) => {
     console.log('DATA', _data)
 
+    let filename
+
+    if (_data?.newFilename) {
+        filename = _data?.newFilename
+    }
+
+    if (!filename) {
+        throw new Error('Oops! No filename provided.')
+    }
+
     const pipePath = '/gateway/pipe'
     const outputPath = '/gateway/output'
-    const commandToRun = `docker exec ipfs_host ipfs add /export/${newFilename}`
+    const commandToRun = `docker exec ipfs_host ipfs add /export/${filename}`
 
     console.log('delete previous output')
     if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath)
