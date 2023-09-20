@@ -96,7 +96,9 @@ const doPin = async (_data) => {
     commandToRun = `docker exec ipfs_host ipfs add -Q --cid-version 1 /export/${filename}`
 
     console.log('delete previous output')
-    if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath)
+    if (fs.existsSync(outputPath)) {
+        fs.unlinkSync(outputPath)
+    }
 
     console.log('commandToRun', commandToRun)
     wstream = fs.createWriteStream(pipePath)
@@ -111,6 +113,7 @@ const doPin = async (_data) => {
         timeoutStart = Date.now()
 
         const myLoop = setInterval(() => {
+console.log('looping...')
             if (Date.now() - timeoutStart > timeout) {
                 clearInterval(myLoop)
 
