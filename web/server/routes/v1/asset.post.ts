@@ -75,7 +75,7 @@ const doPin = async (_data) => {
     let data
     let filename
     let outputPath
-    let outputResponse
+    // let outputResponse
     let pipePath
     let timeout
     let timeoutStart
@@ -93,7 +93,7 @@ const doPin = async (_data) => {
 
     pipePath = '/gateway/pipe'
     outputPath = '/gateway/output'
-    commandToRun = `docker exec ipfs_host ipfs add /export/${filename}`
+    commandToRun = `docker exec ipfs_host ipfs add -Q --cid-version 1 /export/${filename}`
 
     console.log('delete previous output')
     if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath)
@@ -122,21 +122,21 @@ const doPin = async (_data) => {
                 if (fs.existsSync(outputPath)) {
                     clearInterval(myLoop)
 
-                    outputResponse = fs.readFileSync(outputPath).toString()
-                    console.log('OUTPUT RESPONSE', outputResponse)
+                    cid = fs.readFileSync(outputPath).toString()
+                    console.log('CID', cid)
 
                     if (fs.existsSync(outputPath)) {
                         fs.unlinkSync(outputPath) //delete the output file
                     }
 
                     /* Parse (CID) response. */
-                    if (outputResponse.includes('added ')) {
-                        cid = outputResponse.split(filename)[0]
-                        console.log('CID-1', cid)
+                    // if (outputResponse.includes('added ')) {
+                    //     cid = outputResponse.split(filename)[0]
+                    //     console.log('CID-1', cid)
 
-                        cid = cid.split(' ')[1]
-                        console.log('CID-2', cid)
-                    }
+                    //     cid = cid.split(' ')[1]
+                    //     console.log('CID-2', cid)
+                    // }
 
                     /* Resolve CID. */
                     resolve(cid)
