@@ -14,7 +14,8 @@ app.get('*', (req, res) => {
     headers = req.headers
     host = req.host
 
-    parsed = new URL(host)
+    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    parsed = new URL(fullUrl)
 
     res.json({
         headers,
