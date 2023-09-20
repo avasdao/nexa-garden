@@ -9,13 +9,17 @@ app.get('*', (req, res) => {
 
     let headers
     let host
+    let parsed
 
     headers = req.headers
     host = req.host
 
+    parsed = new URL(host)
+
     res.json({
         headers,
         host,
+        parsed,
     })
 })
 
