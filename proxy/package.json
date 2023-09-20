@@ -1,0 +1,10 @@
+{
+  "name": "proxy",
+  "version": "23.9.20",
+  "description": "Proxy handler for sub-domain shortcuts.",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
