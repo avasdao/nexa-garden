@@ -5,26 +5,31 @@ const app = express()
 const port = process.env.PORT || 5000
 
 app.get('*', (req, res) => {
-    console.log(req)
+    // console.log(req)
 
+    let fullUrl
     let headers
     let host
     let subdomain
     let parsed
+    let sourceUrl
 
     headers = req.headers
     host = req.host
 
-    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
     parsed = new URL(fullUrl)
 
     subdomain = parsed.hostname.split('.')[0]
+
+    sourceUrl = req.protocol + '://nexa.garden' + req.originalUrl
 
     res.json({
         headers,
         host,
         parsed,
         subdomain,
+        sourceUrl,
     })
 })
 
