@@ -16,7 +16,7 @@ app.get('*', (req, res) => {
     let sourceUrl
 
     headers = req.headers
-    host = req.host
+    host = req.hostname
 
     fullUrl = `https://${req.get('host')}${req.originalUrl}`
     parsed = new URL(fullUrl)
