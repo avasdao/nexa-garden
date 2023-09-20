@@ -10,6 +10,6 @@ RUN yarn install --silent
 COPY . /usr/src/app
 #RUN yarn run build
 
-EXPOSE 4000
+EXPOSE 5000
 
 CMD ["node", "./index.js"]
