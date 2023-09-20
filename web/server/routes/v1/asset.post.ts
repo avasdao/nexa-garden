@@ -111,7 +111,6 @@ const doPin = async (_data) => {
         timeoutStart = Date.now()
 
         const myLoop = setInterval(() => {
-            console.log('looping...')
             if (Date.now() - timeoutStart > timeout) {
                 clearInterval(myLoop)
 
@@ -130,12 +129,13 @@ const doPin = async (_data) => {
                         fs.unlinkSync(outputPath) //delete the output file
                     }
 
-                    if (outputResponse.includes('added')) {
-                        cid = outputResponse.split(filename)[0]
+                    /* Parse (CID) response. */
+                    if (outputResponse.includes('added ')) {
+                        cid = outputResponse.split(filename)[0].split(' ')[1]
                         console.log('CID', cid)
-
                     }
 
+                    /* Resolve CID. */
                     resolve(cid)
                 }
             }
