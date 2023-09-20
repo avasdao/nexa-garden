@@ -68,25 +68,25 @@ const getPin = async (_cid) => {
 
 const doPin = async (_data) => {
 
-    const pipePath = "/gateway/pipe"
-    const outputPath = "/gateway/output"
-    const commandToRun = "pwd && ls -l"
+    const pipePath = '/gateway/pipe'
+    const outputPath = '/gateway/output'
+    const commandToRun = `docker exec ipfs_host ipfs add /export/2cec5c4d03ffef33702eff200`
 
-    console.log("delete previous output")
+    console.log('delete previous output')
     if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath)
 
-    console.log("writing to pipe...")
+    console.log('writing to pipe...')
     const wstream = fs.createWriteStream(pipePath)
     wstream.write(commandToRun)
     wstream.close()
 
-    console.log("waiting for output...") //there are better ways to do that than setInterval
+    console.log('waiting for output...') //there are better ways to do that than setInterval
     let timeout = 10000 //stop waiting after 10 seconds (something might be wrong)
     const timeoutStart = Date.now()
     const myLoop = setInterval(function () {
         if (Date.now() - timeoutStart > timeout) {
             clearInterval(myLoop);
-            console.log("timed out")
+            console.log('timed out')
         } else {
             //if output.txt exists, read it
             if (fs.existsSync(outputPath)) {
@@ -96,7 +96,7 @@ const doPin = async (_data) => {
                 console.log(data) //log the output of the command
             }
         }
-    }, 300);
+    }, 300)
 
     // const fs = unixfs(helia)
     // // console.log('FS', fs);
