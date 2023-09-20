@@ -131,8 +131,11 @@ const doPin = async (_data) => {
 
                     /* Parse (CID) response. */
                     if (outputResponse.includes('added ')) {
-                        cid = outputResponse.split(filename)[0].split(' ')[1]
-                        console.log('CID', cid)
+                        cid = outputResponse.split(filename)[0]
+                        console.log('CID-1', cid)
+
+                        cid = cid.split(' ')[1]
+                        console.log('CID-2', cid)
                     }
 
                     /* Resolve CID. */
