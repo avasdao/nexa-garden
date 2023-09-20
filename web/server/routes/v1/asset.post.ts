@@ -67,6 +67,7 @@ const getPin = async (_cid) => {
 }
 
 const doPin = async (_data) => {
+    console.log('DATA', _data)
 
     const pipePath = '/gateway/pipe'
     const outputPath = '/gateway/output'
@@ -158,7 +159,7 @@ export default defineEventHandler(async (event) => {
                 return `Oops! You've exceeded the maximum file size (100 MiB).`
             }
         })
-    // console.log('RESPONSE', response)
+    console.log('RESPONSE', response)
 
     if (!response?.length) {
         return null
