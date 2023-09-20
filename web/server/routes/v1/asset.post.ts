@@ -67,36 +67,48 @@ const getPin = async (_cid) => {
 }
 
 const doPin = async (_data) => {
-    console.log('DATA', _data)
+    // console.log('DATA', _data)
 
+    /* Initialize locals. */
+    let cid
+    let commandToRun
+    let data
     let filename
+    let outputPath
+    let outputResponse
+    let pipePath
+    let timeout
+    let timeoutStart
+    let wstream
 
+    /* Validate (filename) data. */
     if (_data?.newFilename) {
         filename = _data?.newFilename
     }
 
+    /* Validate filename. */
     if (!filename) {
         throw new Error('Oops! No filename provided.')
     }
 
-    const pipePath = '/gateway/pipe'
-    const outputPath = '/gateway/output'
-    const commandToRun = `docker exec ipfs_host ipfs add /export/${filename}`
+    pipePath = '/gateway/pipe'
+    outputPath = '/gateway/output'
+    commandToRun = `docker exec ipfs_host ipfs add /export/${filename}`
 
     console.log('delete previous output')
     if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath)
 
     console.log('writing to pipe...')
-    const wstream = fs.createWriteStream(pipePath)
+    wstream = fs.createWriteStream(pipePath)
     wstream.write(commandToRun)
     wstream.close()
 
     return new Promise((resolve, reject) => {
         console.log('waiting for output...') //there are better ways to do that than setInterval
 
-        let timeout = 10000 //stop waiting after 10 seconds (something might be wrong)
+        timeout = 10000 //stop waiting after 10 seconds (something might be wrong)
 
-        const timeoutStart = Date.now()
+        timeoutStart = Date.now()
 
         const myLoop = setInterval(() => {
             if (Date.now() - timeoutStart > timeout) {
@@ -110,15 +122,21 @@ const doPin = async (_data) => {
                 if (fs.existsSync(outputPath)) {
                     clearInterval(myLoop)
 
-                    const data = fs.readFileSync(outputPath).toString()
+                    outputResponse = fs.readFileSync(outputPath).toString()
 
                     if (fs.existsSync(outputPath)) {
                         fs.unlinkSync(outputPath) //delete the output file
                     }
 
-                    console.log(data) //log the output of the command
+                    console.log('OUTPUT RESPONSE', outputResponse)
 
-                    resolve(data)
+                    if (outputResponse.includes('added')) {
+                        cid = outputResponse.split(filename)[0]
+                        console.log('CID', cid)
+
+                    }
+
+                    resolve(cid)
                 }
             }
         }, 300)
