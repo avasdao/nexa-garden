@@ -1,4 +1,5 @@
 import express from 'express'
+import request from 'request'
 
 const app = express()
 
@@ -24,13 +25,14 @@ app.get('*', (req, res) => {
 
     sourceUrl = `https://nexa.garden/ipfs/${subdomain}${req.originalUrl}`
 
-    res.json({
-        headers,
-        host,
-        parsed,
-        subdomain,
-        sourceUrl,
-    })
+    request(sourceUrl).pipe(res)
+    // res.json({
+    //     headers,
+    //     host,
+    //     parsed,
+    //     subdomain,
+    //     sourceUrl,
+    // })
 })
 
 app.listen(port, () => {
