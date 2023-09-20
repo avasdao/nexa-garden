@@ -123,29 +123,25 @@ console.log('looping...')
             } else {
                 //if output.txt exists, read it
                 if (fs.existsSync(outputPath)) {
-                    clearInterval(myLoop)
 
                     cid = fs.readFileSync(outputPath).toString()
-                    console.log('CID', cid)
+                    console.log('CID', cid.length, cid)
 
-                    if (fs.existsSync(outputPath)) {
-                        fs.unlinkSync(outputPath) //delete the output file
+                    /* Validate CID. */
+                    // TODO Perform a "proper" validation.
+                    if (cid.length > 50) {
+                        clearInterval(myLoop)
+
+                        if (fs.existsSync(outputPath)) {
+                            fs.unlinkSync(outputPath) //delete the output file
+                        }
+
+                        /* Resolve CID. */
+                        resolve(cid)
                     }
-
-                    /* Parse (CID) response. */
-                    // if (outputResponse.includes('added ')) {
-                    //     cid = outputResponse.split(filename)[0]
-                    //     console.log('CID-1', cid)
-
-                    //     cid = cid.split(' ')[1]
-                    //     console.log('CID-2', cid)
-                    // }
-
-                    /* Resolve CID. */
-                    resolve(cid)
                 }
             }
-        }, 300)
+        }, 100)
     })
 
     // const fs = unixfs(helia)
