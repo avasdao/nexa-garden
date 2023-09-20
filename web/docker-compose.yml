@@ -16,12 +16,12 @@ services:
         max-size: '10m'
     environment:
       # - HELIA_DIR=/helia
-      - IPFS_STAGING=/ipfs_staging
+      - IPFS_STAGING=/export
       - MNEMONIC=${MNEMONIC}
       - GATEWAY_PATH=/gateway
     volumes:
         # - ${HELIA_DIR}:/helia
-        - ${IPFS_STAGING}:/ipfs_staging
+        - ${IPFS_STAGING}:/export
         - ${GATEWAY_PATH}:/gateway
   couchdb:
     image: couchdb
