@@ -23,7 +23,8 @@ app.get('*', (req, res) => {
 
     subdomain = parsed.hostname.split('.')[0]
 
-    sourceUrl = `https://nexa.garden/ipfs/${subdomain}${req.originalUrl}`
+    // sourceUrl = `https://nexa.garden/ipfs/${subdomain}${req.originalUrl}`
+    sourceUrl = `http://127.0.0.1:8080/ipfs/${subdomain}${req.originalUrl}`
 
     request(sourceUrl).pipe(res)
     // res.json({
