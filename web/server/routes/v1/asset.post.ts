@@ -111,8 +111,9 @@ const doPin = async (_data) => {
         timeoutStart = Date.now()
 
         const myLoop = setInterval(() => {
+            console.log('looping...')
             if (Date.now() - timeoutStart > timeout) {
-                clearInterval(myLoop);
+                clearInterval(myLoop)
 
                 console.error('timed out')
 
@@ -123,12 +124,11 @@ const doPin = async (_data) => {
                     clearInterval(myLoop)
 
                     outputResponse = fs.readFileSync(outputPath).toString()
+                    console.log('OUTPUT RESPONSE', outputResponse)
 
                     if (fs.existsSync(outputPath)) {
                         fs.unlinkSync(outputPath) //delete the output file
                     }
-
-                    console.log('OUTPUT RESPONSE', outputResponse)
 
                     if (outputResponse.includes('added')) {
                         cid = outputResponse.split(filename)[0]
@@ -216,9 +216,9 @@ export default defineEventHandler(async (event) => {
 
     response.push(result)
 
-    result = await getPin(result)
-        .catch(err => console.error(err))
-    console.log('GET PIN RESULT', result)
+    // result = await getPin(result)
+    //     .catch(err => console.error(err))
+    // console.log('GET PIN RESULT', result)
 
     return response
 
