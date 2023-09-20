@@ -9,6 +9,7 @@ app.get('*', (req, res) => {
 
     let headers
     let host
+    let subdomain
     let parsed
 
     headers = req.headers
@@ -17,10 +18,13 @@ app.get('*', (req, res) => {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     parsed = new URL(fullUrl)
 
+    subdomain = parsed.hostname
+
     res.json({
         headers,
         host,
         parsed,
+        subdomain,
     })
 })
 
