@@ -22,7 +22,7 @@ app.get('*', (req, res) => {
 
     subdomain = parsed.hostname.split('.')[0]
 
-    sourceUrl = req.protocol + '://nexa.garden' + req.originalUrl
+    sourceUrl = req.protocol + `://nexa.garden/ipfs/${subdomain}` + req.originalUrl
 
     res.json({
         headers,
