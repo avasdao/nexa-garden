@@ -17,12 +17,12 @@ app.get('*', (req, res) => {
     headers = req.headers
     host = req.host
 
-    fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+    fullUrl = `https://${req.get('host')}${req.originalUrl}`
     parsed = new URL(fullUrl)
 
     subdomain = parsed.hostname.split('.')[0]
 
-    sourceUrl = req.protocol + `://nexa.garden/ipfs/${subdomain}` + req.originalUrl
+    sourceUrl = `https://nexa.garden/ipfs/${subdomain}${req.originalUrl}`
 
     res.json({
         headers,
