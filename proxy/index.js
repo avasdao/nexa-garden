@@ -18,7 +18,7 @@ app.get('*', (req, res) => {
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     parsed = new URL(fullUrl)
 
-    subdomain = parsed.hostname
+    subdomain = parsed.hostname.split('.')[0]
 
     res.json({
         headers,
