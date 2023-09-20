@@ -4,9 +4,19 @@ const app = express()
 
 const port = process.env.PORT || 5000
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
     console.log(req)
-    res.send('Hello World!')
+
+    let headers
+    let host
+
+    headers = req.headers
+    host = req.host
+
+    res.json({
+        headers,
+        host,
+    })
 })
 
 app.listen(port, () => {
