@@ -139,7 +139,7 @@ export default defineEventHandler(async (event) => {
     let assetPkg
 
     options = {
-        uploadDir: process.env.UPLOAD_DIR,
+        uploadDir: process.env.IPFS_STAGING,
         maxFieldsSize: 1 * 1024 * 1024,         //   1 MiB
         maxFileSize: 100 * 1024 * 1024,         // 100 MiB
         maxTotalFileSize: 1024 * 1024 * 1024,   //   1 GiB
