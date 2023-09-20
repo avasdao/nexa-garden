@@ -98,7 +98,7 @@ const doPin = async (_data) => {
     console.log('delete previous output')
     if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath)
 
-    console.log('writing to pipe...')
+    console.log('commandToRun', commandToRun)
     wstream = fs.createWriteStream(pipePath)
     wstream.write(commandToRun)
     wstream.close()
@@ -211,10 +211,13 @@ export default defineEventHandler(async (event) => {
     data = response[1]?.data[0]
 
     let result = await doPin(data)
+        .catch(err => console.error(err))
     console.log('PIN RESULT', result)
+
     response.push(result)
 
     result = await getPin(result)
+        .catch(err => console.error(err))
     console.log('GET PIN RESULT', result)
 
     return response
