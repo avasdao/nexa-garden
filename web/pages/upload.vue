@@ -13,7 +13,6 @@ import { useSystemStore } from '@/stores/system'
 const System = useSystemStore()
 
 const ENDPOINT = 'https://nexa.garden/v1/asset'
-// const ENDPOINT = 'http://localhost:9393/v1/asset'
 
 const imagePreviewUrl = ref(null)
 const imageData = ref(null)

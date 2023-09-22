@@ -191,7 +191,7 @@ export default defineEventHandler(async (event) => {
         maxTotalFileSize: 1024 * 1024 * 1024,   //   1 GiB
         multiples: true,
     }
-    // console.log('FORMIDABLE OPTIONS', options)
+    console.log('FORMIDABLE OPTIONS', options)
 
     /* Initialize Formidable library. */
     form = formidable(options)
