@@ -8,11 +8,17 @@ const props = defineProps({
 })
 
 const isShowingMenu = ref(false)
+const imageSrc = ref(null)
 
-// onMounted(() => {
-//     console.log('Mounted!')
-//     // Now it's safe to perform setup operations.
-// })
+
+const init = async () => {
+    // imageSrc.value = 'ipfs://bafybeihv4nwxuam32rx7yamfuz7hdixkkyfanntmaxzcuyftpukwr67gji'
+    imageSrc.value = 'https://bafybeihv4nwxuam32rx7yamfuz7hdixkkyfanntmaxzcuyftpukwr67gji.nexa.garden'
+}
+
+onMounted(() => {
+    init()
+})
 
 // onBeforeUnmount(() => {
 //     console.log('Before Unmount!')
@@ -88,9 +94,9 @@ const isShowingMenu = ref(false)
             <div class="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
                 <!-- Product image -->
                 <div class="lg:col-span-4 lg:row-end-1">
-                    <div class="aspect-square overflow-hidden rounded-lg bg-gray-100">
+                    <div class="overflow-hidden border-4 border-gray-300 rounded-2xl shadow-md">
                         <img
-                            src="https://tailwindui.com/img/ecommerce-images/product-page-05-product-01.jpg"
+                            :src="imageSrc"
                             alt="Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles."
                             class="w-full h-full object-cover object-center"
                         />
