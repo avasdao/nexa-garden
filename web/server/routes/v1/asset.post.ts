@@ -124,7 +124,7 @@ console.log('looping...')
                 //if output.txt exists, read it
                 if (fs.existsSync(outputPath)) {
 
-                    cid = fs.readFileSync(outputPath).toString()
+                    cid = fs.readFileSync(outputPath).toString().trim()
                     console.log('CID', cid.length, cid)
 
                     /* Validate CID. */

@@ -19,6 +19,8 @@ useHead({
 
 <template>
     <main class="bg-green-900">
+        <Header />
+
         <Hero />
 
         <!-- <Logos /> -->
