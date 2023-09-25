@@ -110,12 +110,26 @@ onMounted(() => {
             <div class="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
                 <!-- Product image -->
                 <div class="lg:col-span-4 lg:row-end-1">
-                    <div class="overflow-hidden border-4 border-gray-300 rounded-2xl shadow-md">
-                        <img
-                            :src="imageSrc"
-                            alt="Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles."
-                            class="w-full h-full object-cover object-center"
-                        />
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+
+                            <div class="flip-card-front">
+                                <div class="overflow-hidden border-4 border-gray-300 rounded-2xl shadow-md">
+                                    <img
+                                        :src="imageSrc"
+                                        alt="Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles."
+                                        class="w-full h-full object-cover object-center"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="flip-card-back">
+                                <h1>John Doe</h1>
+                                <p>Architect & Engineer</p>
+                                <p>We love that guy</p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
@@ -177,20 +191,33 @@ onMounted(() => {
                         The Application UI Icon Pack comes with over 200 icons in 3 styles: outline, filled, and branded. This playful icon pack is tailored for complex application user interfaces with a friendly and legible look.
                     </p>
 
-                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
                         <button
                             @click="reveal"
-                            class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-2xl font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                         >
-                            Reveal
+                            Reveal Front
                         </button>
 
                         <button
                             type="button"
-                            class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            class="flex w-full items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-3 text-2xl font-medium text-amber-100 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                         >
-                            Flip
+                            Flip to Back
                         </button>
+
+                        <div class="flex flex-col items-center">
+                            <button
+                                disabled
+                                class="cursor-not-allowed opacity-50 flex w-full items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-2xl font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            >
+                                Launch App
+                            </button>
+
+                            <small class="mt-1 text-rose-400 italic font-medium">
+                                authorization required
+                            </small>
+                        </div>
                     </div>
 
                     <div class="mt-10 border-t border-gray-200 pt-10">
@@ -462,3 +489,43 @@ onMounted(() => {
 
     <Footer />
 </template>
+
+<style>
+.flip-card {
+  background-color: transparent;
+  width: 600px;
+  height: 600px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
+</style>
