@@ -21,6 +21,7 @@ const tokenid = ref(null)
 const cardbBin = ref(null)
 const cardfBin = ref(null)
 const coverBin = ref(null)
+const playBin = ref(null)
 
 
 const init = async () => {
@@ -63,15 +64,28 @@ const init = async () => {
     base64String = btoa(binStr)
     cardfBin.value = base64String
 
-    imageSrc.value = `data:image/png;base64, ${coverBin.value}`
+    /* Set play binary. */
+    binStr = decompressed['play.ogg'].reduce((data, byte)=> {
+        return data + String.fromCharCode(byte)
+    }, '')
+    base64String = btoa(binStr)
+    playBin.value = base64String
+
+    /* Set (initial) image. */
+    imageSrc.value = `data:image/png;base64,${coverBin.value}`
 }
 
 const reveal = () => {
-    imageSrc.value = `data:image/png;base64, ${cardfBin.value}`
+    imageSrc.value = `data:image/png;base64,${cardfBin.value}`
 
     setTimeout(() => {
-        imageSrc.value = `data:image/png;base64, ${coverBin.value}`
+        imageSrc.value = `data:image/png;base64,${coverBin.value}`
     }, REVEAL_TIMEOUT)
+}
+
+const play = async () => {
+    const audio = new Audio(`data:audio/ogg;base64,${playBin.value}`)
+    audio.play()
 }
 
 onMounted(() => {
@@ -236,14 +250,14 @@ onMounted(() => {
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
                         <button
                             @click="reveal"
-                            class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-2xl font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-sky-600 px-8 py-3 text-2xl font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                         >
                             Reveal Front
                         </button>
 
                         <button
                             type="button"
-                            class="flex w-full items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-3 text-2xl font-medium text-amber-100 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-3 text-2xl font-medium text-amber-100 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                         >
                             Flip to Back
                         </button>
@@ -251,7 +265,7 @@ onMounted(() => {
                         <div class="flex flex-col items-center">
                             <button
                                 disabled
-                                class="cursor-not-allowed opacity-50 flex w-full items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-2xl font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                                class="cursor-not-allowed opacity-50 h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-2xl font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                             >
                                 Launch App
                             </button>
@@ -260,6 +274,13 @@ onMounted(() => {
                                 authorization required
                             </small>
                         </div>
+
+                        <button
+                            @click="play"
+                            class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-2xl font-medium text-indigo-100 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                        >
+                            Play
+                        </button>
                     </div>
 
                     <div class="mt-10 border-t border-gray-200 pt-10">
