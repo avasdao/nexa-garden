@@ -3,5 +3,5 @@ export default defineEventHandler(async (event) => {
     const tokenid = event.context.params.tokenid
 
     /* Return profile id. */
-    return 'Looking for -> ' + tokenid
+    return `Starting download for [ ${tokenid} ] binary data. Please wait...`
 })
