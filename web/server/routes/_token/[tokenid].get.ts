@@ -7,14 +7,12 @@ const pinsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COU
 
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
-    let binArchive
-    let binSource
-    let ownerid
-    let pinid
+    let asset
     let response
+    let tokenid
 
     /* Set token id. */
-    const tokenid = event.context.params.tokenid
+    tokenid = event.context.params.tokenid
 
     /* Validate token id. */
     if (!tokenid) {
@@ -31,50 +29,16 @@ export default defineEventHandler(async (event) => {
         return `Oops! We could not find [ ${tokenid} ]. Please try again...`
     }
 
-    /* Set pin id. */
-    pinid = response?.pinid
-
-    /* Validate pin id. */
-    if (!pinid) {
-        return `Oops! We could not find a data file. Please try again...`
+    /* Clone the asset. */
+    asset = {
+        groupid: response._id,
+        ...response,
     }
 
-    /* Request pin id. */
-    response = await pinsDb.get(pinid)
-        .catch(err => console.error(err))
-    console.log('RESPONSE', response)
+    /* Cleanup database keys. */
+    delete asset._id
+    delete asset._rev
 
-    /* Validate response. */
-    if (!response) {
-        return `Oops! We could not find a data file. Please try again...`
-    }
-
-    /* Set ownerid. */
-    ownerid = response.ownerid
-
-    /* Validate owner id. */
-    if (!ownerid) {
-        return `Oops! We could not find an OWNER. Please try again...`
-    }
-
-    // TODO Verify that OWNER is credited to serve this data.
-
-    // NOTE: We will exclude NiftyArt data from this requirement.
-
-    binSource = `https://${pinid}.nexa.garden`
-    console.log('BINARY SOURCE', binSource)
-
-    /* Request data file. */
-    // FIXME Pull this data from LOCAL HOST (when in production).
-    binArchive = await $fetch(binSource)
-        .catch(err => console.error(err))
-    // console.log('BIN ARCHIVE', binArchive.length)
-
-    /* Validate binary archive. */
-    if (binArchive) {
-        return binArchive
-    }
-
-    /* Return profile id. */
-    return `Oops! We could not find any asset data for [ ${tokenid} ]. Please try again...`
+    /* Return asset (data). */
+    return asset
 })
