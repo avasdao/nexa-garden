@@ -7,10 +7,13 @@ const props = defineProps({
     },
 })
 
+const route = useRoute()
+
 const REVEAL_TIMEOUT = 7000
 
 const isShowingMenu = ref(false)
 const imageSrc = ref(null)
+const tokenid = ref(null)
 
 const cardb = ref(null)
 const cardf = ref(null)
@@ -18,7 +21,14 @@ const cover = ref(null)
 
 
 const init = async () => {
-    cover.value = 'bafybeic7crntw5ycafsfdnsw4hku32jlqmgrux2kqgsxrdi3hche7ashmq'
+    tokenid.value = route.params.tokenid
+    console.log('TOKEN ID', tokenid.value)
+
+    let binArchive = await $fetch(`https://nexa.garden/_token/${tokenid.value}`)
+        .catch(err => console.error(err))
+    console.log('BIN ARCHIVE', binArchive.length, binArchive)
+
+    cover.value = 'bafybeihv4nwxuam32rx7yamfuz7hdixkkyfanntmaxzcuyftpukwr67gji'
     cardf.value = 'bafybeifojzblnubcobpzgdcwk62iwfo74b3oamtmv5fjesgb3hdczta6fm'
 
     imageSrc.value = `https://${cover.value}.nexa.garden`
