@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/* Import modules. */
+import * as fflate from 'fflate'
+
 /* Define properties. */
 // https://vuejs.org/guide/components/props.html#props-declaration
 const props = defineProps({
@@ -15,30 +18,59 @@ const isShowingMenu = ref(false)
 const imageSrc = ref(null)
 const tokenid = ref(null)
 
-const cardb = ref(null)
-const cardf = ref(null)
-const cover = ref(null)
+const cardbBin = ref(null)
+const cardfBin = ref(null)
+const coverBin = ref(null)
 
 
 const init = async () => {
     tokenid.value = route.params.tokenid
     console.log('TOKEN ID', tokenid.value)
 
-    let binArchive = await $fetch(`https://nexa.garden/_token/${tokenid.value}`)
+    console.log(`https://nexa.garden/_token/${tokenid.value}`)
+    let blobArchive = await $fetch(`https://nexa.garden/_token/${tokenid.value}`)
         .catch(err => console.error(err))
-    console.log('BIN ARCHIVE', binArchive.length, binArchive)
+    console.log('BLOB ARCHIVE', blobArchive)
 
-    cover.value = 'bafybeihv4nwxuam32rx7yamfuz7hdixkkyfanntmaxzcuyftpukwr67gji'
-    cardf.value = 'bafybeifojzblnubcobpzgdcwk62iwfo74b3oamtmv5fjesgb3hdczta6fm'
+    let binArchive = await blobArchive.arrayBuffer()
+    console.log('BINARY ARCHIVE-1', binArchive)
 
-    imageSrc.value = `https://${cover.value}.nexa.garden`
+    binArchive = new Uint8Array(binArchive)
+    console.log('BINARY ARCHIVE-2', binArchive)
+
+    let decompressed = fflate.unzipSync(binArchive)
+    console.log('DECOMPRESSED', decompressed)
+
+
+    let base64String
+    let binStr
+
+    binStr = decompressed['public.png'].reduce((data, byte)=> {
+        return data + String.fromCharCode(byte)
+    }, '')
+    base64String = btoa(binStr)
+    coverBin.value = base64String
+
+    binStr = decompressed['cardb.png'].reduce((data, byte)=> {
+        return data + String.fromCharCode(byte)
+    }, '')
+    base64String = btoa(binStr)
+    cardbBin.value = base64String
+
+    binStr = decompressed['cardf.png'].reduce((data, byte)=> {
+        return data + String.fromCharCode(byte)
+    }, '')
+    base64String = btoa(binStr)
+    cardfBin.value = base64String
+
+    imageSrc.value = `data:image/png;base64, ${coverBin.value}`
 }
 
 const reveal = () => {
-    imageSrc.value = `https://${cardf.value}.nexa.garden`
+    imageSrc.value = `data:image/png;base64, ${cardfBin.value}`
 
     setTimeout(() => {
-        imageSrc.value = `https://${cover.value}.nexa.garden`
+        imageSrc.value = `data:image/png;base64, ${coverBin.value}`
     }, REVEAL_TIMEOUT)
 }
 
