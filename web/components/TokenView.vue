@@ -15,6 +15,8 @@ const route = useRoute()
 const REVEAL_TIMEOUT = 7000
 
 const isShowingMenu = ref(false)
+const isRevealed = ref(false)
+
 const imgCoverSrc = ref(null)
 const imgRevealSrc = ref(null)
 const tokenid = ref(null)
@@ -80,9 +82,13 @@ const reveal = () => {
     imgRevealSrc.value = `data:image/png;base64,${cardfBin.value}`
 
     flippinClass.value = `flippin`
+    isRevealed.value = true
+
+    play()
 
     setTimeout(() => {
         flippinClass.value = ''
+        isRevealed.value = false
     }, REVEAL_TIMEOUT)
 }
 
@@ -90,13 +96,15 @@ const flip = () => {
     imgRevealSrc.value = `data:image/png;base64,${cardbBin.value}`
 
     flippinClass.value = `flippin`
+    isRevealed.value = true
 
     setTimeout(() => {
         flippinClass.value = ''
+        isRevealed.value = false
     }, REVEAL_TIMEOUT)
 }
 
-const play = async () => {
+const play = () => {
     const audio = new Audio(`data:audio/ogg;base64,${playBin.value}`)
     audio.play()
 }
@@ -267,14 +275,18 @@ onMounted(() => {
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
                         <button
                             @click="reveal"
+                            :disabled="isRevealed"
                             class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-sky-600 px-8 py-3 text-2xl font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            :class="{ 'cursor-not-allowed opacity-30': isRevealed }"
                         >
                             Reveal Front
                         </button>
 
                         <button
                             @click="flip"
+                            :disabled="isRevealed"
                             class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-3 text-2xl font-medium text-amber-100 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            :class="{ 'cursor-not-allowed opacity-30': isRevealed }"
                         >
                             Flip to Back
                         </button>
@@ -282,7 +294,7 @@ onMounted(() => {
                         <div class="flex flex-col items-center">
                             <button
                                 disabled
-                                class="cursor-not-allowed opacity-50 h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-2xl font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                                class="cursor-not-allowed opacity-30 h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-2xl font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                             >
                                 Launch App
                             </button>
