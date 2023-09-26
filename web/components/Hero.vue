@@ -99,7 +99,7 @@ const props = defineProps({
                     </NuxtLink>
 
                     <NuxtLink to="https://avas.cash/bootstrap" target="_blank" class="text-xl font-semibold leading-6 text-lime-50 hover:text-lime-300">
-                        Watch a demo <span aria-hidden="true">→</span>
+                        Stake for early access <span aria-hidden="true">→</span>
                     </NuxtLink>
                 </div>
             </div>
