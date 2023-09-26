@@ -20,6 +20,7 @@ const isRevealed = ref(false)
 
 const imgCoverSrc = ref(null)
 const imgRevealSrc = ref(null)
+const slug = ref(null)
 const tokenid = ref(null)
 const tokenInfo = ref(null)
 
@@ -31,8 +32,21 @@ const playBin = ref(null)
 const flippinClass = ref(null)
 
 const init = async () => {
+    let response
+
+    console.log('PARAMS', route.params)
+
+    slug.value = route.params.slug
+    // console.log('SLUG ID', slug.value)
+
     tokenid.value = route.params.tokenid
     // console.log('TOKEN ID', tokenid.value)
+
+    if (slug.value && !tokenid.value) {
+        tokenid.value = await $fetch(`/api/shareid/${slug.value}`)
+            .catch(err => console.error(err))
+        console.log('SLUG RESPONSE', tokenid.value)
+    }
 
     let blobArchive = await $fetch(`https://nexa.garden/_raw/${tokenid.value}`)
         .catch(err => console.error(err))
