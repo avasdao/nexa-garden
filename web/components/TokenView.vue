@@ -13,6 +13,7 @@ const props = defineProps({
 const route = useRoute()
 
 const REVEAL_TIMEOUT = 7000
+const SCROLL_TOP_MARGIN = 85
 
 const isShowingMenu = ref(false)
 const isRevealed = ref(false)
@@ -95,6 +96,8 @@ const init = async () => {
 }
 
 const reveal = () => {
+    window.scrollTo({top: SCROLL_TOP_MARGIN, behavior: 'smooth'})
+
     imgRevealSrc.value = `data:image/png;base64,${cardfBin.value}`
 
     flippinClass.value = `flippin`
@@ -109,6 +112,8 @@ const reveal = () => {
 }
 
 const flip = () => {
+    window.scrollTo({top: SCROLL_TOP_MARGIN, behavior: 'smooth'})
+
     imgRevealSrc.value = `data:image/png;base64,${cardbBin.value}`
 
     flippinClass.value = `flippin`
@@ -204,25 +209,25 @@ onMounted(() => {
                 <!-- Product image -->
                 <div class="lg:col-span-4 lg:row-end-1">
 
-                    <div class="flip-card h-[300px] sm:h-[530px] lg:h-[650px]">
+                    <div class="flip-card h-[300px] sm:h-[530px]">
 
                         <div class="flip-card-inner" :class="flippinClass">
 
                             <div class="flip-card-front">
-                                <div class="overflow-hidden border-4 border-gray-300 rounded-2xl shadow-md">
+                                <div v-if="imgCoverSrc" class="overflow-hidden border-4 border-gray-300 rounded-2xl shadow-md">
                                     <img
                                         :src="imgCoverSrc"
-                                        alt="Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles."
+                                        :alt="tokenInfo?.info"
                                         class="w-full h-full object-cover object-center"
                                     />
                                 </div>
                             </div>
 
                             <div class="flip-card-back">
-                                <div class="overflow-hidden border-4 border-gray-300 rounded-2xl shadow-md">
+                                <div v-if="imgRevealSrc" class="overflow-hidden border-4 border-gray-300 rounded-2xl shadow-md">
                                     <img
                                         :src="imgRevealSrc"
-                                        alt="Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles."
+                                        :alt="tokenInfo?.info"
                                         class="w-full h-full object-cover object-center"
                                     />
                                 </div>
@@ -236,16 +241,16 @@ onMounted(() => {
                 <div class="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
                     <div class="flex flex-col-reverse">
                         <div class="mt-4">
-                            <h1 class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl">
+                            <h1 class="text-6xl font-medium lg:font-bold text-center tracking-tight text-gray-800 sm:text-7xl">
                                 {{tokenInfo?.title}}
                             </h1>
 
-                            <h3 class="pl-1 text-2xl font-thin text-gray-500 sm:text-xl italic tracking-widest">
+                            <h3 class="text-xl sm:text-2xl font-thin text-gray-500 italic tracking-widest">
                                 by {{tokenInfo?.author}}
                             </h3>
 
                             <h2 id="information-heading" class="sr-only">Asset information</h2>
-                            <div class="mt-2 text-sm text-gray-500">
+                            <div class="mt-2 sm:mt-0 text-sm text-gray-500 text-right">
                                 <span class="text-2xl text-indigo-400 font-medium">{{tokenInfo?.subseries}}</span>
                                 <span class="italic">
                                     from
@@ -257,7 +262,7 @@ onMounted(() => {
                         <!-- <Reviews /> -->
                     </div>
 
-                    <p class="mt-6 text-gray-500">
+                    <p class="mt-6 text-gray-500 text-lg leading-9 tracking-widest">
                         {{tokenInfo?.info}}
                     </p>
 
