@@ -20,6 +20,7 @@ const isRevealed = ref(false)
 const imgCoverSrc = ref(null)
 const imgRevealSrc = ref(null)
 const tokenid = ref(null)
+const tokenInfo = ref(null)
 
 const cardbBin = ref(null)
 const cardfBin = ref(null)
@@ -48,6 +49,21 @@ const init = async () => {
 
     let base64String
     let binStr
+    let json
+
+    json = decompressed['info.json'].reduce((data, byte)=> {
+        return data + String.fromCharCode(byte)
+    }, '')
+
+    try {
+        json = JSON.parse(json)
+    } catch (err) {
+        console.error(err)
+    }
+
+    if (json?.gardenVer || json.niftyVer) {
+        tokenInfo.value = json
+    }
 
     binStr = decompressed['public.png'].reduce((data, byte)=> {
         return data + String.fromCharCode(byte)
@@ -187,7 +203,9 @@ onMounted(() => {
             <div class="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
                 <!-- Product image -->
                 <div class="lg:col-span-4 lg:row-end-1">
-                    <div class="flip-card">
+
+                    <div class="flip-card h-[300px] sm:h-[530px] lg:h-[650px]">
+
                         <div class="flip-card-inner" :class="flippinClass">
 
                             <div class="flip-card-front">
@@ -218,58 +236,29 @@ onMounted(() => {
                 <div class="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
                     <div class="flex flex-col-reverse">
                         <div class="mt-4">
-                            <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Application UI Icon Pack</h1>
+                            <h1 class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl">
+                                {{tokenInfo?.title}}
+                            </h1>
 
-                            <h2 id="information-heading" class="sr-only">Product information</h2>
-                            <p class="mt-2 text-sm text-gray-500">Version 1.0 (Updated <time datetime="2021-06-05">June 5, 2021</time>)</p>
-                        </div>
+                            <h3 class="pl-1 text-2xl font-thin text-gray-500 sm:text-xl italic tracking-widest">
+                                by {{tokenInfo?.author}}
+                            </h3>
 
-                        <div>
-                            <h3 class="sr-only">Reviews</h3>
-                            <div class="flex items-center">
-                                <!-- Active: "text-yellow-400", Default: "text-gray-300" -->
-                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd"
-                                    />
-                                </svg>
-                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd"
-                                    />
-                                </svg>
-                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd"
-                                    />
-                                </svg>
-                                <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd"
-                                    />
-                                </svg>
-                                <svg class="text-gray-300 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd"
-                                    />
-                                </svg>
+                            <h2 id="information-heading" class="sr-only">Asset information</h2>
+                            <div class="mt-2 text-sm text-gray-500">
+                                <span class="text-2xl text-indigo-400 font-medium">{{tokenInfo?.subseries}}</span>
+                                <span class="italic">
+                                    from
+                                    <span class="text-base font-medium">{{tokenInfo?.series}}</span>
+                                </span>
                             </div>
-                            <p class="sr-only">4 out of 5 stars</p>
                         </div>
+
+                        <!-- <Reviews /> -->
                     </div>
 
                     <p class="mt-6 text-gray-500">
-                        The Application UI Icon Pack comes with over 200 icons in 3 styles: outline, filled, and branded. This playful icon pack is tailored for complex application user interfaces with a friendly and legible look.
+                        {{tokenInfo?.info}}
                     </p>
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
@@ -308,30 +297,45 @@ onMounted(() => {
                             @click="play"
                             class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-2xl font-medium text-indigo-100 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                         >
-                            Play
+                            Play Media
                         </button>
                     </div>
 
                     <div class="mt-10 border-t border-gray-200 pt-10">
-                        <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
+                        <h3 class="text-xl font-medium text-gray-700">
+                            Highlights
+                        </h3>
+
                         <div class="prose prose-sm mt-4 text-gray-500">
                             <ul role="list">
-                                <li>200+ SVG icons in 3 unique styles</li>
-                                <li>Compatible with Figma, Sketch, and Adobe XD</li>
-                                <li>Drawn on 24 x 24 pixel grid</li>
+                                <li>Category: {{tokenInfo?.category}}</li>
+                                <li v-if="tokenInfo?.gardenVer">Garden version: v{{tokenInfo?.gardenVer}}</li>
+                                <li v-if="tokenInfo?.niftyVer">NiftyArt version: v{{tokenInfo?.niftyVer}}</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="mt-10 border-t border-gray-200 pt-10">
-                        <h3 class="text-sm font-medium text-gray-900">License</h3>
-                        <p class="mt-4 text-sm text-gray-500">
-                            For personal and professional use. You cannot resell or redistribute these icons in their original or modified state. <a href="javascript://" class="font-medium text-indigo-600 hover:text-indigo-500">Read full license</a>
+                        <h3 class="text-xl font-medium text-gray-900">
+                            License
+                        </h3>
+
+                        <h4 class="mt-4 text-base font-medium text-indigo-600">
+                            Creative Commons Zero (CC0)
+                        </h4>
+
+                        <p class="text-sm text-gray-500">
+                            For personal and professional use.
+                            You cannot resell or redistribute these icons in their original or modified state.
+                            <a href="javascript://" class="font-medium text-blue-500 hover:text-blue-400">Read full license</a>
                         </p>
                     </div>
 
                     <div class="mt-10 border-t border-gray-200 pt-10">
-                        <h3 class="text-sm font-medium text-gray-900">Share</h3>
+                        <h3 class="text-xl font-medium text-gray-900">
+                            Share
+                        </h3>
+
                         <ul role="list" class="mt-4 flex items-center space-x-6">
                             <li>
                                 <a href="javascript://" class="flex h-6 w-6 items-center justify-center text-gray-400 hover:text-gray-500">
@@ -345,6 +349,7 @@ onMounted(() => {
                                     </svg>
                                 </a>
                             </li>
+
                             <li>
                                 <a href="javascript://" class="flex h-6 w-6 items-center justify-center text-gray-400 hover:text-gray-500">
                                     <span class="sr-only">Share on Instagram</span>
@@ -357,6 +362,7 @@ onMounted(() => {
                                     </svg>
                                 </a>
                             </li>
+
                             <li>
                                 <a href="javascript://" class="flex h-6 w-6 items-center justify-center text-gray-400 hover:text-gray-500">
                                     <span class="sr-only">Share on Twitter</span>
@@ -371,210 +377,7 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <div class="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
-                    <div>
-                        <div class="border-b border-gray-200">
-                            <div class="-mb-px flex space-x-8" aria-orientation="horizontal" role="tablist">
-                                <!-- Selected: "border-indigo-600 text-indigo-600", Not Selected: "border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800" -->
-                                <button
-                                    id="tab-reviews"
-                                    class="border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800 whitespace-nowrap border-b-2 py-6 text-sm font-medium"
-                                    aria-controls="tab-panel-reviews"
-                                    role="tab"
-                                    type="button"
-                                >
-                                    Customer Reviews
-                                </button>
-                                <button
-                                    id="tab-faq"
-                                    class="border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800 whitespace-nowrap border-b-2 py-6 text-sm font-medium"
-                                    aria-controls="tab-panel-faq"
-                                    role="tab"
-                                    type="button"
-                                >
-                                    FAQ
-                                </button>
-                                <button
-                                    id="tab-license"
-                                    class="border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800 whitespace-nowrap border-b-2 py-6 text-sm font-medium"
-                                    aria-controls="tab-panel-license"
-                                    role="tab"
-                                    type="button"
-                                >
-                                    License
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- 'Customer Reviews' panel, show/hide based on tab state -->
-                        <div id="tab-panel-reviews" class="-mb-10" aria-labelledby="tab-reviews" role="tabpanel" tabindex="0">
-                            <h3 class="sr-only">Customer Reviews</h3>
-
-                            <div class="flex space-x-4 text-sm text-gray-500">
-                                <div class="flex-none py-10">
-                                    <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="" class="h-10 w-10 rounded-full bg-gray-100" />
-                                </div>
-                                <div class="py-10">
-                                    <h3 class="font-medium text-gray-900">Emily Selman</h3>
-                                    <p><time datetime="2021-07-16">July 16, 2021</time></p>
-
-                                    <div class="mt-4 flex items-center">
-                                        <!-- Active: "text-yellow-400", Default: "text-gray-300" -->
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <p class="sr-only">5 out of 5 stars</p>
-
-                                    <div class="prose prose-sm mt-4 max-w-none text-gray-500">
-                                        <p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex space-x-4 text-sm text-gray-500">
-                                <div class="flex-none py-10">
-                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="" class="h-10 w-10 rounded-full bg-gray-100" />
-                                </div>
-                                <div class="py-10 border-t border-gray-200">
-                                    <h3 class="font-medium text-gray-900">Hector Gibbons</h3>
-                                    <p><time datetime="2021-07-12">July 12, 2021</time></p>
-
-                                    <div class="mt-4 flex items-center">
-                                        <!-- Active: "text-yellow-400", Default: "text-gray-300" -->
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                        <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <p class="sr-only">5 out of 5 stars</p>
-
-                                    <div class="prose prose-sm mt-4 max-w-none text-gray-500">
-                                        <p>
-                                            Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create
-                                            a single icon this good, so it's a steal at this price.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- More reviews... -->
-                        </div>
-
-                        <!-- 'FAQ' panel, show/hide based on tab state -->
-                        <div id="tab-panel-faq" class="text-sm text-gray-500" aria-labelledby="tab-faq" role="tabpanel" tabindex="0">
-                            <h3 class="sr-only">Frequently Asked Questions</h3>
-
-                            <dl>
-                                <dt class="mt-10 font-medium text-gray-900">What format are these icons?</dt>
-                                <dd class="prose prose-sm mt-2 max-w-none text-gray-500">
-                                    <p>The icons are in SVG (Scalable Vector Graphic) format. They can be imported into your design tool of choice and used directly in code.</p>
-                                </dd>
-                                <dt class="mt-10 font-medium text-gray-900">Can I use the icons at different sizes?</dt>
-                                <dd class="prose prose-sm mt-2 max-w-none text-gray-500">
-                                    <p>
-                                        Yes. The icons are drawn on a 24 x 24 pixel grid, but the icons can be scaled to different sizes as needed. We don&#039;t recommend going smaller than 20 x 20 or larger than 64 x 64 to retain legibility
-                                        and visual balance.
-                                    </p>
-                                </dd>
-
-                                <!-- More FAQs... -->
-                            </dl>
-                        </div>
-
-                        <!-- 'License' panel, show/hide based on tab state -->
-                        <div id="tab-panel-license" class="pt-10" aria-labelledby="tab-license" role="tabpanel" tabindex="0">
-                            <h3 class="sr-only">License</h3>
-
-                            <div class="prose prose-sm max-w-none text-gray-500">
-                                <h4>Overview</h4>
-
-                                <p>For personal and professional use. You cannot resell or redistribute these icons in their original or modified state.</p>
-
-                                <ul role="list">
-                                    <li>You're allowed to use the icons in unlimited projects.</li>
-                                    <li>Attribution is not required to use the icons.</li>
-                                </ul>
-
-                                <h4>What you can do with it</h4>
-
-                                <ul role="list">
-                                    <li>Use them freely in your personal and professional work.</li>
-                                    <li>Make them your own. Change the colors to suit your project or brand.</li>
-                                </ul>
-
-                                <h4>What you can't do with it</h4>
-
-                                <ul role="list">
-                                    <li>Don't be greedy. Selling or distributing these icons in their original or modified state is prohibited.</li>
-                                    <li>Don't be evil. These icons cannot be used on websites or applications that promote illegal or immoral beliefs or activities.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- <TokenExtras /> -->
             </div>
         </div>
     </main>
@@ -584,10 +387,10 @@ onMounted(() => {
 
 <style>
 .flip-card {
-  background-color: transparent;
-  width: 600px;
-  height: 600px;
-  perspective: 1000px;
+  /* background-color: transparent; */
+  /* width: 100%; */
+  /* height: 100%; */
+  /* perspective: 300%; */
 }
 
 .flip-card-inner {
