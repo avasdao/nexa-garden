@@ -25,7 +25,6 @@ export default defineEventHandler(async (event) => {
     /* Request asset. */
     response = await assetsDb.get(tokenid)
         .catch(err => console.error(err))
-    // console.log('RESPONSE', response)
 
     /* Validate response. */
     if (!response) {
@@ -43,7 +42,6 @@ export default defineEventHandler(async (event) => {
     /* Request content id. */
     response = await pinsDb.get(cid)
         .catch(err => console.error(err))
-    // console.log('RESPONSE', response)
 
     /* Validate response. */
     if (!response) {
@@ -63,13 +61,11 @@ export default defineEventHandler(async (event) => {
     // NOTE: We will exclude NiftyArt data from this requirement.
 
     binSource = `https://${cid}.nexa.garden`
-    // console.log('BINARY SOURCE', binSource)
 
     /* Request data file. */
     // FIXME Pull this data from LOCAL HOST (when in production).
     binArchive = await $fetch(binSource)
         .catch(err => console.error(err))
-    // console.log('BIN ARCHIVE', binArchive.length)
 
     /* Validate binary archive. */
     if (binArchive) {

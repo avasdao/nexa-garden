@@ -3,7 +3,6 @@ import PouchDB from 'pouchdb'
 
 /* Initialize databases. */
 const assetsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/assets`)
-const pinsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/pins`)
 
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
@@ -22,7 +21,6 @@ export default defineEventHandler(async (event) => {
     /* Request asset. */
     response = await assetsDb.get(tokenid)
         .catch(err => console.error(err))
-    // console.log('RESPONSE', response)
 
     /* Validate response. */
     if (!response) {

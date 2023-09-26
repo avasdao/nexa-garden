@@ -1,14 +1,9 @@
 <script setup lang="ts">
-useHead({
-    title: `Shortcut — Nexa Garden`,
-    meta: [
-        { name: 'description', content: `Nexa Garden makes building your next BIG idea effortless.` }
-    ],
-})
-
 /* Initialize stores. */
 import { useSystemStore } from '@/stores/system'
 const System = useSystemStore()
+
+// TODO Add support for additional media types.
 
 // onMounted(() => {
 //     console.log('Mounted!')

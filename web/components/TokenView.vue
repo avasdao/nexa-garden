@@ -81,6 +81,20 @@ const init = async () => {
         tokenInfo.value = json
     }
 
+    /* Set (browser) metadata. */
+    useHead({
+        /* Set title. */
+        title: `${tokenInfo.value?.title} by ${tokenInfo.value?.author} — Nexa Garden`,
+
+        /* Set description. */
+        meta: [
+            { name: 'description', content: tokenInfo.value?.info }
+        ],
+
+        // TODO Add social media poster.
+    })
+
+    /* Decompress archive data. */
     binStr = decompressed['public.png'].reduce((data, byte)=> {
         return data + String.fromCharCode(byte)
     }, '')
