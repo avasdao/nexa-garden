@@ -192,7 +192,7 @@ onMounted(() => {
                 <!-- <a href="javascript://" class="text-sm font-semibold leading-6 text-gray-900">Marketplace</a> -->
                 <!-- <a href="javascript://" class="text-sm font-semibold leading-6 text-gray-900">Company</a> -->
 
-                <NuxtLink to="/" class="text-sm font-semibold leading-6 text-gray-900">
+                <NuxtLink to="/" class="text-sm font-medium leading-6 text-lime-600">
                     Back to the Garden <span aria-hidden="true">&rarr;</span>
                 </NuxtLink>
             </div>
