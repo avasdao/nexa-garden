@@ -65,7 +65,7 @@ const props = defineProps({
                 <img class="w-24 h-auto" src="~/assets/icon.png" alt="Nexa Garden" />
 
                 <div class="mt-24 sm:mt-32 lg:mt-16">
-                    <a href="javascript://" class="inline-flex space-x-6">
+                    <NuxtLink to="https://avasdao.org/roadmap" target="_blank" class="inline-flex space-x-6">
                         <span class="rounded-full bg-lime-500/10 px-3 py-1 text-sm font-semibold leading-6 text-lime-400 ring-1 ring-inset ring-lime-500/20">
                             Latest updates
                         </span>
@@ -77,7 +77,7 @@ const props = defineProps({
                                 <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
                             </svg>
                         </span>
-                    </a>
+                    </NuxtLink>
                 </div>
 
                 <h1 class="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">
@@ -98,9 +98,9 @@ const props = defineProps({
                         Start Uploading...
                     </NuxtLink>
 
-                    <a href="javascript://" class="text-xl font-semibold leading-6 text-lime-50 hover:text-lime-300">
+                    <NuxtLink to="https://avas.cash/bootstrap" target="_blank" class="text-xl font-semibold leading-6 text-lime-50 hover:text-lime-300">
                         Watch a demo <span aria-hidden="true">→</span>
-                    </a>
+                    </NuxtLink>
                 </div>
             </div>
 
