@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     /* Request asset. */
     response = await assetsDb.get(tokenid)
         .catch(err => console.error(err))
-    console.log('RESPONSE', response)
+    // console.log('RESPONSE', response)
 
     /* Validate response. */
     if (!response) {

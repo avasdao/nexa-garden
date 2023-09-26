@@ -113,7 +113,7 @@ const doPin = async (_data) => {
         timeoutStart = Date.now()
 
         const myLoop = setInterval(() => {
-console.log('looping...')
+// console.log('looping...')
             if (Date.now() - timeoutStart > timeout) {
                 clearInterval(myLoop)
 
@@ -192,7 +192,7 @@ export default defineEventHandler(async (event) => {
         maxTotalFileSize: 1024 * 1024 * 1024,   //   1 GiB
         multiples: true,
     }
-    console.log('FORMIDABLE OPTIONS', options)
+    // console.log('FORMIDABLE OPTIONS', options)
 
     /* Initialize Formidable library. */
     form = formidable(options)
@@ -205,7 +205,7 @@ export default defineEventHandler(async (event) => {
                 return `Oops! You've exceeded the maximum file size (100 MiB).`
             }
         })
-    console.log('RESPONSE', response)
+    // console.log('RESPONSE', response)
 
     if (!response?.length) {
         return null
@@ -215,7 +215,7 @@ export default defineEventHandler(async (event) => {
 
     result = await doPin(data)
         .catch(err => console.error(err))
-    console.log('PIN RESULT', result)
+    // console.log('PIN RESULT', result)
 
     response.push(result)
 

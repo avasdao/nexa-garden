@@ -15,7 +15,8 @@ const route = useRoute()
 const REVEAL_TIMEOUT = 7000
 
 const isShowingMenu = ref(false)
-const imageSrc = ref(null)
+const imgCoverSrc = ref(null)
+const imgRevealSrc = ref(null)
 const tokenid = ref(null)
 
 const cardbBin = ref(null)
@@ -23,24 +24,24 @@ const cardfBin = ref(null)
 const coverBin = ref(null)
 const playBin = ref(null)
 
+const flippinClass = ref(null)
 
 const init = async () => {
     tokenid.value = route.params.tokenid
-    console.log('TOKEN ID', tokenid.value)
+    // console.log('TOKEN ID', tokenid.value)
 
-    console.log(`https://nexa.garden/_token/${tokenid.value}`)
-    let blobArchive = await $fetch(`https://nexa.garden/_token/${tokenid.value}`)
+    let blobArchive = await $fetch(`https://nexa.garden/_raw/${tokenid.value}`)
         .catch(err => console.error(err))
-    console.log('BLOB ARCHIVE', blobArchive)
+    // console.log('BLOB ARCHIVE', blobArchive)
 
     let binArchive = await blobArchive.arrayBuffer()
-    console.log('BINARY ARCHIVE-1', binArchive)
+    // console.log('BINARY ARCHIVE-1', binArchive)
 
     binArchive = new Uint8Array(binArchive)
-    console.log('BINARY ARCHIVE-2', binArchive)
+    // console.log('BINARY ARCHIVE-2', binArchive)
 
     let decompressed = fflate.unzipSync(binArchive)
-    console.log('DECOMPRESSED', decompressed)
+    // console.log('DECOMPRESSED', decompressed)
 
 
     let base64String
@@ -72,14 +73,26 @@ const init = async () => {
     playBin.value = base64String
 
     /* Set (initial) image. */
-    imageSrc.value = `data:image/png;base64,${coverBin.value}`
+    imgCoverSrc.value = `data:image/png;base64,${coverBin.value}`
 }
 
 const reveal = () => {
-    imageSrc.value = `data:image/png;base64,${cardfBin.value}`
+    imgRevealSrc.value = `data:image/png;base64,${cardfBin.value}`
+
+    flippinClass.value = `flippin`
 
     setTimeout(() => {
-        imageSrc.value = `data:image/png;base64,${coverBin.value}`
+        flippinClass.value = ''
+    }, REVEAL_TIMEOUT)
+}
+
+const flip = () => {
+    imgRevealSrc.value = `data:image/png;base64,${cardbBin.value}`
+
+    flippinClass.value = `flippin`
+
+    setTimeout(() => {
+        flippinClass.value = ''
     }, REVEAL_TIMEOUT)
 }
 
@@ -167,12 +180,12 @@ onMounted(() => {
                 <!-- Product image -->
                 <div class="lg:col-span-4 lg:row-end-1">
                     <div class="flip-card">
-                        <div class="flip-card-inner">
+                        <div class="flip-card-inner" :class="flippinClass">
 
                             <div class="flip-card-front">
                                 <div class="overflow-hidden border-4 border-gray-300 rounded-2xl shadow-md">
                                     <img
-                                        :src="imageSrc"
+                                        :src="imgCoverSrc"
                                         alt="Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles."
                                         class="w-full h-full object-cover object-center"
                                     />
@@ -180,9 +193,13 @@ onMounted(() => {
                             </div>
 
                             <div class="flip-card-back">
-                                <h1>John Doe</h1>
-                                <p>Architect & Engineer</p>
-                                <p>We love that guy</p>
+                                <div class="overflow-hidden border-4 border-gray-300 rounded-2xl shadow-md">
+                                    <img
+                                        :src="imgRevealSrc"
+                                        alt="Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles."
+                                        class="w-full h-full object-cover object-center"
+                                    />
+                                </div>
                             </div>
 
                         </div>
@@ -256,7 +273,7 @@ onMounted(() => {
                         </button>
 
                         <button
-                            type="button"
+                            @click="flip"
                             class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-3 text-2xl font-medium text-amber-100 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                         >
                             Flip to Back
@@ -570,7 +587,7 @@ onMounted(() => {
   transform-style: preserve-3d;
 }
 
-.flip-card:hover .flip-card-inner {
+.flippin {
   transform: rotateY(180deg);
 }
 
@@ -587,8 +604,8 @@ onMounted(() => {
 }
 
 .flip-card-back {
-  background-color: #2980b9;
-  color: white;
+  /* background-color: #2980b9; */
+  /* color: white; */
   transform: rotateY(180deg);
 }
 </style>
