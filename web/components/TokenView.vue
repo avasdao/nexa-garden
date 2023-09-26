@@ -13,6 +13,7 @@ const props = defineProps({
 const route = useRoute()
 
 const REVEAL_TIMEOUT = 7000
+const PLAY_DELAY = 500
 const SCROLL_TOP_MARGIN = 85
 
 const isShowingMenu = ref(false)
@@ -117,7 +118,7 @@ const reveal = () => {
     flippinClass.value = `flippin`
     isRevealed.value = true
 
-    play()
+    setTimeout(play, PLAY_DELAY)
 
     setTimeout(() => {
         flippinClass.value = ''
