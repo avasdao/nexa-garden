@@ -238,9 +238,10 @@ onMounted(() => {
             <!-- Product -->
             <div class="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
                 <!-- Product image -->
-                <div class="lg:col-span-4 lg:row-end-1">
+                <div class="lg:col-span-4 lg:row-end-1 flex justify-center">
 
-                    <div class="flip-card h-[300px] sm:h-[530px]">
+                    <div class="w-[380px] h-[320px] sm:w-[640px] sm:h-[570px] lg:w-full">
+                    <!-- <div class=""> -->
 
                         <div class="flip-card-inner" :class="flippinClass">
 
@@ -422,13 +423,6 @@ onMounted(() => {
 </template>
 
 <style>
-.flip-card {
-  /* background-color: transparent; */
-  /* width: 100%; */
-  /* height: 100%; */
-  /* perspective: 300%; */
-}
-
 .flip-card-inner {
   position: relative;
   width: 100%;
@@ -450,13 +444,8 @@ onMounted(() => {
   backface-visibility: hidden;
 }
 
-.flip-card-front {
-  color: black;
-}
 
 .flip-card-back {
-  /* background-color: #2980b9; */
-  /* color: white; */
   transform: rotateY(180deg);
 }
 </style>
