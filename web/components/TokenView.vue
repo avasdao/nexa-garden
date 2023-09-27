@@ -302,27 +302,30 @@ onMounted(() => {
                         <button
                             @click="reveal"
                             :disabled="isRevealed"
-                            class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-sky-600 px-8 py-10 text-3xl lg:text-2xl font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-sky-600 px-8 py-10 text-3xl lg:text-4xl font-medium text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                             :class="{ 'cursor-not-allowed opacity-30': isRevealed }"
                         >
-                            Reveal Front
+                            <span class="lg:hidden">Reveal Front</span>
+                            <span class="hidden lg:flex">Reveal</span>
                         </button>
 
                         <button
                             @click="flip"
                             :disabled="isRevealed"
-                            class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-10 text-3xl lg:text-2xl font-medium text-amber-100 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-10 text-3xl lg:text-4xl font-medium text-amber-100 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                             :class="{ 'cursor-not-allowed opacity-30': isRevealed }"
                         >
-                            Flip to Back
+                            <span class="lg:hidden">Flip to Back</span>
+                            <span class="hidden lg:flex">Flip</span>
                         </button>
 
                         <div class="flex flex-col items-center">
                             <button
                                 disabled
-                                class="cursor-not-allowed opacity-30 h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-10 text-3xl lg:text-2xl font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                                class="cursor-not-allowed opacity-30 h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-10 text-3xl lg:text-4xl font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                             >
-                                Launch App
+                                <span class="lg:hidden">Launch App</span>
+                                <span class="hidden lg:flex">Launch</span>
                             </button>
 
                             <small class="mt-1 text-rose-400 italic font-medium">
@@ -332,9 +335,10 @@ onMounted(() => {
 
                         <button
                             @click="play"
-                            class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-10 text-3xl lg:text-2xl font-medium text-indigo-100 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                            class="h-16 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-10 text-3xl lg:text-4xl font-medium text-indigo-100 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                         >
-                            Play Media
+                            <span class="lg:hidden">Play Media</span>
+                            <span class="hidden lg:flex">Play</span>
                         </button>
                     </div>
 
