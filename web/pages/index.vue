@@ -24,9 +24,9 @@ onBeforeMount(() => {
         console.log('HOSTNAME', hostname)
 
         /* Detect all mirrors. */
-        if (hostname === 'nexa.fan') {
+        if (hostname === 'nexa.fan' || hash === '#fan') {
             /* Set flag. */
-            isFan.value = true
+            // isFan.value = true
         } else {
             /* Set flag. */
             isGarden.value = true
@@ -48,7 +48,6 @@ onMounted(() => {
 <template>
     <div>
         <FanHome v-if="isFan" />
-
-        <GardenHome v-if="isGarden" />
+        <GardenHome v-else />
     </div>
 </template>
