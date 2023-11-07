@@ -9,7 +9,9 @@ useHead({
 })
 
 /* Initialize stores. */
+import { useProfileStore } from '@/stores/profile'
 import { useSystemStore } from '@/stores/system'
+const Profile = useProfileStore()
 const System = useSystemStore()
 
 const ENDPOINT = 'https://nexa.garden/v1/asset'
@@ -47,8 +49,7 @@ const upload = async () => {
 
     formData.append('name', imageData.value?.name)
 
-    formData.append('hi', 'there!')
-    formData.append('merhaba', 'kadin!')
+    formData.append('sessionid', Profile.sessionid)
 
     formData.append('data', imageData.value)
 
