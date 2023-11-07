@@ -10,30 +10,6 @@ import { sha256 } from '@nexajs/crypto'
 
 /* Initialize databases. */
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
-// const rainmakerProfilesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/rainmaker_profiles`)
-// const rainmakerTxsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/rainmaker_txs`)
-
-/* Initialize (global) Helia. */
-// let helia
-
-// console.log('process.env.HELIA_DIR', process.env.HELIA_DIR)
-// const blockstore = new FsBlockstore(process.env.HELIA_DIR)
-// console.log('blockstore', blockstore)
-
-// const heliaOptions = {
-//     libp2p: createLibp2p({
-//         // ..other settings
-//         peerDiscovery: [
-//             bootstrap({
-//                 list: [
-//                     '/dnsaddr/bootstrap.io/p2p/QmBootstrap1',
-//                     '/dnsaddr/bootstrap.io/p2p/QmBootstrap2'
-//                     // etc
-//                 ]
-//             })
-//         ]
-//     })
-// }
 
 const init = async () => {
     // helia = await createHelia({
@@ -143,25 +119,6 @@ console.log('looping...')
             }
         }, 100)
     })
-
-    // const fs = unixfs(helia)
-    // // console.log('FS', fs);
-
-    // const directoryCid = await fs.addDirectory()
-    // console.log('DIR', directoryCid)
-
-    // // we will use this TextEncoder to turn strings into Uint8Arrays
-    // const encoder = new TextEncoder()
-    // const bytes = encoder.encode('Hello World 201')
-
-    // // add the bytes to your node and receive a unique content identifier
-    // const cid = await fs.addBytes(bytes)
-    // console.log('Added file:', cid.toString())
-
-    // const updatedCid = await fs.cp(cid, directoryCid, 'foo.txt')
-    // console.info(updatedCid)
-
-    // return cid
 }
 
 init()
