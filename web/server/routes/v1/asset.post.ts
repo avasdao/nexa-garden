@@ -163,7 +163,7 @@ export default defineEventHandler(async (event) => {
     }
 
     /* Set metadata. */
-    metadata = response[metadata]
+    metadata = response[0]
 
     /* Set session id. */
     sessionid = metadata?.sessionid
