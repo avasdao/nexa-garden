@@ -245,19 +245,19 @@ export default defineEventHandler(async (event) => {
     availSpace = parseInt((buckets * 1e9) - pinned)
     console.log('AVAILABLE SPACE', availSpace)
 
-    /* Validate available space. */
-    // if (availSpace < XXX) {
-    //     return {
-    //         error: 'Oops! You are out of disk space!',
-    //         body,
-    //     }
-    // }
-
     /* Set (binary) file data. */
     data = response[1]?.data[0]
 
     filesize = data.size
     console.log('FILESIZE', filesize)
+
+    /* Validate available space. */
+    if (filesize > availSpace) {
+        return {
+            error: 'Oops! You are out of disk space!',
+            body,
+        }
+    }
 
     result = await doPin(data)
         .catch(err => console.error(err))
