@@ -34,6 +34,8 @@ const System = useSystemStore()
         <h2>Balance</h2>
 
         <h3>0.00 NEXA</h3>
+
+        <ProfileWallet />
     </main>
 
     <Footer />

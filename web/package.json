@@ -1,6 +1,6 @@
 {
   "name": "nexa-garden",
-  "version": "23.9.19",
+  "version": "23.11.7",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -12,7 +12,7 @@
   "dependencies": {
     "@helia/unixfs": "1.4.2",
     "@pinia/nuxt": "0.4.7",
-    "blockstore-fs": "^1.1.6",
+    "blockstore-fs": "1.1.6",
     "fflate": "0.8.0",
     "formidable": "3.5.1",
     "helia": "2.0.1",
@@ -22,6 +22,8 @@
     "nuxt": "3.0.0",
     "pinia": "2.0.32",
     "pouchdb": "8.0.1",
+    "qr-scanner": "1.4.2",
+    "qrcode": "1.5.3",
     "uuid": "9.0.0"
   },
   "devDependencies": {
