@@ -10,6 +10,7 @@ import { sha256 } from '@nexajs/crypto'
 
 /* Initialize databases. */
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
+const profilesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/profiles`)
 const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/sessions`)
 
 const init = async () => {
@@ -127,10 +128,13 @@ init()
 
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
+    let buckets
     let data
     let form
     let metadata
     let options
+    let pinned
+    let profile
     let profileid
     let response
     let result
@@ -191,7 +195,32 @@ export default defineEventHandler(async (event) => {
     /* Set profile id. */
     // NOTE: This is typically a (33-byte) public key.
     profileid = session.profileid
-    console.log('PROFILEID', profileid)
+    console.log('PROFILE ID', profileid)
+
+    /* Request profile. */
+    profile = await profilesDb
+        .get(profileid)
+        .catch(err => {
+            console.error(err)
+            error = err
+        })
+    console.log('PROFILE', profile)
+
+    /* Validate profile. */
+    if (!profile) {
+        return {
+            error: 'Profile NOT found!',
+            body,
+        }
+    }
+
+    /* Set (profile) buckets. */
+    buckets = profile.buckets
+    console.log('BUCKETS', buckets)
+
+    /* Set (profile) pinned (disk usage). */
+    pinned = profile.pinned
+    console.log('PINNED', pinned)
 
     /* Set (binary) file data. */
     data = response[1]?.data[0]
