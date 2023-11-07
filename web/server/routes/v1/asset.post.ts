@@ -126,20 +126,15 @@ init()
 
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
-    let address
-    let body
-    let campaign
-    let campaignid
     let data
-    let fields
-    let files
     let form
+    let metadata
     let options
-    let profiles
-    let receivers
+    let profileid
     let response
-    let txidem
-    let assetPkg
+    let result
+    let session
+    let sessionid
 
     options = {
         uploadDir: process.env.IPFS_STAGING,
@@ -167,9 +162,39 @@ export default defineEventHandler(async (event) => {
         return null
     }
 
+    /* Set metadata. */
+    metadata = response[metadata]
+
+    /* Set session id. */
+    sessionid = metadata?.sessionid
+    console.log('SESSION ID', sessionid)
+
+    /* Validate session id. */
+    if (!sessionid || typeof sessionid === 'undefined') {
+        return {
+            error: 'Session NOT found!',
+            body,
+        }
+    }
+
+    /* Request session. */
+    session = await sessionsDb
+        .get(sessionid)
+        .catch(err => {
+            console.error(err)
+            error = err
+        })
+    console.log('SESSION', session)
+
+    /* Set profile id. */
+    // NOTE: This is typically a (33-byte) public key.
+    profileid = session.profileid
+    console.log('PROFILEID', profileid)
+
+    /* Set (binary) file data. */
     data = response[1]?.data[0]
 
-    let result = await doPin(data)
+    result = await doPin(data)
         .catch(err => console.error(err))
     console.log('PIN RESULT', result)
 
