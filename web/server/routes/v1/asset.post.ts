@@ -128,8 +128,10 @@ init()
 
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
+    let availSpace
     let buckets
     let data
+    let filesize
     let form
     let metadata
     let options
@@ -218,12 +220,44 @@ export default defineEventHandler(async (event) => {
     buckets = profile.buckets
     console.log('BUCKETS', buckets)
 
+    /* Validate buckets. */
+    if (!buckets || typeof buckets === 'undefined') {
+        return {
+            error: 'You have NOT created any buckets!',
+            body,
+        }
+    }
+
     /* Set (profile) pinned (disk usage). */
     pinned = profile.pinned
     console.log('PINNED', pinned)
 
+    /* Validate buckets. */
+    if (!pinned || typeof pinned === 'undefined') {
+        return {
+            error: 'Oops! Something has gone horribly wrong!',
+            body,
+        }
+    }
+
+    /* Calculate available space. */
+    // NOTE: Each bucket is 1,000,000,000 (billion) bytes.
+    availSpace = parseInt((buckets * 1e9) - pinned)
+    console.log('AVAILABLE SPACE', availSpace)
+
+    /* Validate available space. */
+    // if (availSpace < XXX) {
+    //     return {
+    //         error: 'Oops! You are out of disk space!',
+    //         body,
+    //     }
+    // }
+
     /* Set (binary) file data. */
     data = response[1]?.data[0]
+
+    filesize = data.size
+    console.log('FILESIZE', filesize)
 
     result = await doPin(data)
         .catch(err => console.error(err))
