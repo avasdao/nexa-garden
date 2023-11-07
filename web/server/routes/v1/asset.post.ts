@@ -164,7 +164,7 @@ export default defineEventHandler(async (event) => {
 
     /* Set metadata. */
     metadata = response[0]
-    consoe.log('METADATA', metadata)
+    console.log('METADATA', metadata)
 
     /* Set session id. */
     sessionid = metadata?.sessionid
