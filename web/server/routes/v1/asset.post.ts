@@ -131,6 +131,7 @@ export default defineEventHandler(async (event) => {
     let availSpace
     let buckets
     let data
+    let error
     let filesize
     let form
     let metadata
