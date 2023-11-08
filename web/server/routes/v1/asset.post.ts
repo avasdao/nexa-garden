@@ -129,6 +129,7 @@ init()
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
     let availSpace
+    let body
     let buckets
     let data
     let error
@@ -156,7 +157,10 @@ export default defineEventHandler(async (event) => {
     /* Initialize Formidable library. */
     form = formidable(options)
 
-    response = await form.parse(event.node.req)
+    /* Set body. */
+    body = event.node.req
+
+    response = await form.parse(body)
         .catch(err => {
             console.error(err)
 
