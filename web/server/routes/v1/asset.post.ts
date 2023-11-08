@@ -160,6 +160,7 @@ export default defineEventHandler(async (event) => {
     /* Set body. */
     body = event.node.req
 
+    /* Parse (form) body. */
     response = await form.parse(body)
         .catch(err => {
             console.error(err)
@@ -170,6 +171,7 @@ export default defineEventHandler(async (event) => {
         })
     console.log('RESPONSE', response)
 
+    /* Validate response. */
     if (!response?.length) {
         return null
     }
@@ -186,7 +188,7 @@ export default defineEventHandler(async (event) => {
     if (!sessionid || typeof sessionid === 'undefined') {
         return {
             error: 'Session NOT found!',
-            body,
+            response,
         }
     }
 
@@ -217,7 +219,7 @@ export default defineEventHandler(async (event) => {
     if (!profile) {
         return {
             error: 'Profile NOT found!',
-            body,
+            response,
         }
     }
 
@@ -229,7 +231,7 @@ export default defineEventHandler(async (event) => {
     if (!buckets || typeof buckets === 'undefined') {
         return {
             error: 'You have NOT created any buckets!',
-            body,
+            response,
         }
     }
 
@@ -241,7 +243,7 @@ export default defineEventHandler(async (event) => {
     if (!pinned || typeof pinned === 'undefined') {
         return {
             error: 'Oops! Something has gone horribly wrong!',
-            body,
+            response,
         }
     }
 
@@ -260,7 +262,7 @@ export default defineEventHandler(async (event) => {
     if (filesize > availSpace) {
         return {
             error: 'Oops! You are out of disk space!',
-            body,
+            response,
         }
     }
 
