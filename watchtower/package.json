@@ -3,6 +3,7 @@
   "version": "23.11.11",
   "description": "Manages Nexa Garden (foreign) assets.",
   "main": "index.js",
+  "type": "module",
   "license": "MIT",
   "dependencies": {
     "moment": "^2.29.4",
