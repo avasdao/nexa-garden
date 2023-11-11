@@ -1,0 +1,13 @@
+{
+  "name": "watchtower",
+  "version": "23.11.11",
+  "description": "Manages Nexa Garden (foreign) assets.",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.29.4",
+    "nexajs": "^23.11.8",
+    "numeral": "^2.0.6",
+    "uuid": "^9.0.1"
+  }
+}
