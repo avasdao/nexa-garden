@@ -146,11 +146,21 @@ export default defineEventHandler(async (event) => {
     let sessionid
     let tokenid
 
+    const approvedCollections = [
+        'cacf3d958161a925c28a970d3c40deec1a3fe06796fe1b4a7b68f377cdb90000', // NiftyArt
+        '9732745682001b06e332b6a4a0dd0fffc4837c707567f8cbfe0f6a9b12080000', // Studio Time + Collection
+    ]
+
     const req = event.node.req
     // console.log(req)
 
     /* Set token id. */
     tokenid = event.context.params.tokenid
+
+    /* Validate collection. */
+    if (!approvedCollections.includes(approvedCollections)) {
+        return `Oops! This collection is NOT supported on this platform.`
+    }
 
     /* Request file content. */
     const fileContent = await readFile(req)
@@ -198,14 +208,14 @@ export default defineEventHandler(async (event) => {
         createdAt: moment().unix(),
     }
 
-    // response = assetsDb
+    // response = await assetsDb
     //     .put(assetPkg)
     //     .catch(err => console.error(err))
     // console.log('ASSETS RESPONSE', response)
 
     const pinPkg = {
         _id: cid,
-        ownerid: null,
+        ownerid: true, // FOR DEV PURPOSES ONLY
         size: 0,
         filepath: `/export/${tokenid}`,
         newFilename: tokenid,
@@ -217,7 +227,7 @@ export default defineEventHandler(async (event) => {
         expiresAt: 0
     }
 
-    response = pinsDb.put(pinPkg)
+    response = await pinsDb.put(pinPkg)
         .catch(err => console.error(err))
     console.log('PINS RESPONSE', response)
 

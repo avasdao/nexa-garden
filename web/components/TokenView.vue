@@ -93,35 +93,62 @@ const init = async () => {
 
         // TODO Add social media poster.
     })
+console.log('DECOMPRESSED', decompressed)
 
-    /* Decompress archive data. */
-    binStr = decompressed['public.png'].reduce((data, byte)=> {
-        return data + String.fromCharCode(byte)
-    }, '')
-    base64String = btoa(binStr)
-    coverBin.value = base64String
+    if (decompressed['public.png']) {
+        /* Decompress archive data. */
+        binStr = decompressed['public.png'].reduce((data, byte)=> {
+            return data + String.fromCharCode(byte)
+        }, '')
+        base64String = btoa(binStr)
+        coverBin.value = base64String
+    }
 
-    binStr = decompressed['cardb.png'].reduce((data, byte)=> {
-        return data + String.fromCharCode(byte)
-    }, '')
-    base64String = btoa(binStr)
-    cardbBin.value = base64String
+    if (decompressed['cardb.png']) {
+        binStr = decompressed['cardb.png'].reduce((data, byte)=> {
+            return data + String.fromCharCode(byte)
+        }, '')
+        base64String = btoa(binStr)
+        cardbBin.value = base64String
+    }
 
-    binStr = decompressed['cardf.png'].reduce((data, byte)=> {
-        return data + String.fromCharCode(byte)
-    }, '')
-    base64String = btoa(binStr)
-    cardfBin.value = base64String
+    if (decompressed['cardf.png']) {
+        binStr = decompressed['cardf.png'].reduce((data, byte)=> {
+            return data + String.fromCharCode(byte)
+        }, '')
+        base64String = btoa(binStr)
+        cardfBin.value = base64String
+    }
+    if (decompressed['cardf.jpeg']) {
+        binStr = decompressed['cardf.jpeg'].reduce((data, byte)=> {
+            return data + String.fromCharCode(byte)
+        }, '')
+        base64String = btoa(binStr)
+        cardfBin.value = base64String
+    }
+    if (decompressed['cardf.jpg']) {
+        binStr = decompressed['cardf.jpg'].reduce((data, byte)=> {
+            return data + String.fromCharCode(byte)
+        }, '')
+        base64String = btoa(binStr)
+        cardfBin.value = base64String
+    }
 
-    /* Set play binary. */
-    binStr = decompressed['play.ogg'].reduce((data, byte)=> {
-        return data + String.fromCharCode(byte)
-    }, '')
-    base64String = btoa(binStr)
-    playBin.value = base64String
+    if (decompressed['play.ogg']) {
+        /* Set play binary. */
+        binStr = decompressed['play.ogg'].reduce((data, byte)=> {
+            return data + String.fromCharCode(byte)
+        }, '')
+        base64String = btoa(binStr)
+        playBin.value = base64String
+    }
 
     /* Set (initial) image. */
-    imgCoverSrc.value = `data:image/png;base64,${coverBin.value}`
+    if (coverBin.value) {
+        imgCoverSrc.value = `data:image/png;base64,${coverBin.value}`
+    } else if (cardfBin.value) {
+        imgCoverSrc.value = `data:image/png;base64,${cardfBin.value}`
+    }
 }
 
 const reveal = () => {
