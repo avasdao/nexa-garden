@@ -61,14 +61,13 @@ const readFile = (_req) => {
     })
 }
 
-const doPin = async (_data) => {
+const doPin = async (_tokenid, _data) => {
     // console.log('DATA', _data)
 
     /* Initialize locals. */
     let cid
     let commandToRun
     let data
-    let filename
     let outputPath
     // let outputResponse
     let pipePath
@@ -76,19 +75,14 @@ const doPin = async (_data) => {
     let timeoutStart
     let wstream
 
-    /* Validate (filename) data. */
-    if (_data?.newFilename) {
-        filename = _data?.newFilename
-    }
-
-    /* Validate filename. */
-    if (!filename) {
-        throw new Error('Oops! No filename provided.')
+    /* Validate token id . */
+    if (!_tokenid) {
+        throw new Error('Oops! No token id provided.')
     }
 
     pipePath = '/gateway/pipe'
     outputPath = '/gateway/output'
-    commandToRun = `docker exec ipfs_host ipfs add -Q --cid-version 1 /export/${filename}`
+    commandToRun = `docker exec ipfs_host ipfs add -Q --cid-version 1 /export/${_tokenid}`
 
     console.log('delete previous output')
     if (fs.existsSync(outputPath)) {
@@ -159,7 +153,6 @@ export default defineEventHandler(async (event) => {
     let result
     let session
     let sessionid
-    let success
     let tokenid
 
     const req = event.node.req
@@ -179,13 +172,15 @@ export default defineEventHandler(async (event) => {
         fullPath = process.env.IPFS_STAGING + tokenid
         console.log('FULL PATH', fullPath)
 
-        success = await fs.writeFileSync(fullPath, fileContent)
-        console.log('SUCCESS', success)
+        /* (Synchronous) file write. */
+        fs.writeFileSync(fullPath, fileContent)
 
-        /* Validate success. */
-        if (success) {
-            doPin(tokenid, fileContent)
-        }
+        /* Pin (save) to IPFS. */
+        result = await doPin(tokenid, fileContent)
+        console.log('PIN RESULT', result)
+
+        // TOOO Database inserts.
+
     } catch (err) {
         console.error(err)
     }
