@@ -60,6 +60,85 @@ const readFile = (_req) => {
     })
 }
 
+const doPin = async (_data) => {
+    // console.log('DATA', _data)
+
+    /* Initialize locals. */
+    let cid
+    let commandToRun
+    let data
+    let filename
+    let outputPath
+    // let outputResponse
+    let pipePath
+    let timeout
+    let timeoutStart
+    let wstream
+
+    /* Validate (filename) data. */
+    if (_data?.newFilename) {
+        filename = _data?.newFilename
+    }
+
+    /* Validate filename. */
+    if (!filename) {
+        throw new Error('Oops! No filename provided.')
+    }
+
+    pipePath = '/gateway/pipe'
+    outputPath = '/gateway/output'
+    commandToRun = `docker exec ipfs_host ipfs add -Q --cid-version 1 /export/${filename}`
+
+    console.log('delete previous output')
+    if (fs.existsSync(outputPath)) {
+        fs.unlinkSync(outputPath)
+    }
+
+    console.log('commandToRun', commandToRun)
+    wstream = fs.createWriteStream(pipePath)
+    wstream.write(commandToRun)
+    wstream.close()
+
+    return new Promise((resolve, reject) => {
+        console.log('waiting for output...') //there are better ways to do that than setInterval
+
+        timeout = 10000 //stop waiting after 10 seconds (something might be wrong)
+
+        timeoutStart = Date.now()
+
+        const myLoop = setInterval(() => {
+console.log('looping...')
+            if (Date.now() - timeoutStart > timeout) {
+                clearInterval(myLoop)
+
+                console.error('timed out')
+
+                reject('timed out')
+            } else {
+                //if output.txt exists, read it
+                if (fs.existsSync(outputPath)) {
+
+                    cid = fs.readFileSync(outputPath).toString().trim()
+                    console.log('CID', cid.length, cid)
+
+                    /* Validate CID. */
+                    // TODO Perform a "proper" validation.
+                    if (cid.length > 50) {
+                        clearInterval(myLoop)
+
+                        if (fs.existsSync(outputPath)) {
+                            fs.unlinkSync(outputPath) //delete the output file
+                        }
+
+                        /* Resolve CID. */
+                        resolve(cid)
+                    }
+                }
+            }
+        }, 100)
+    })
+}
+
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
     let availSpace
@@ -67,8 +146,10 @@ export default defineEventHandler(async (event) => {
     let buckets
     let data
     let error
+    let filename
     let filesize
     let form
+    let fullPath
     let metadata
     let options
     let pinned
@@ -78,10 +159,14 @@ export default defineEventHandler(async (event) => {
     let result
     let session
     let sessionid
+    let success
     let tokenid
 
     const req = event.node.req
     // console.log(req)
+
+    /* Set token id. */
+    tokenid = event.context.params.tokenid
 
     /* Request file content. */
     const fileContent = await readFile(req)
@@ -90,6 +175,19 @@ export default defineEventHandler(async (event) => {
     try {
         const unzipped = fflate.unzipSync(fileContent)
         console.log('UNZIPPED', unzipped)
+
+        filename = tokenid + '.zip'
+        console.log('FILENAME', filename)
+
+        fullPath = process.env.IPFS_STAGING + filename
+        console.log('FULL PATH', fullPath)
+
+        success = fs.writeFileSync(fullPath, fileContent)
+        console.log('SUCCESS', success)
+
+        if (success) {
+            doPin(filename, fileContent)
+        }
     } catch (err) {
         console.error(err)
     }
