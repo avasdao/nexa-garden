@@ -250,6 +250,7 @@ export default defineEventHandler(async (event) => {
         info: json.info,
         data: json.data,
         license: json.license,
+        isVerified: false,
         createdAt: moment().unix(),
     }
     // console.log('ASSET PKG', assetPkg)
