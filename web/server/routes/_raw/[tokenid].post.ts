@@ -281,11 +281,26 @@ export default defineEventHandler(async (event) => {
         .catch(err => console.error(err))
     // console.log('PINS RESPONSE', response)
 
+    /* Initialize archived. */
+    const archived = {}
+
+    /* Handle unarchived. */
+    Object.keys(unarchived).forEach(_filename => {
+        /* Set file. */
+        const file = unarchived[_filename]
+
+        /* Add (info) to archived. */
+        archived[filename] = {
+            id: sha256(sha256(file)),
+            length: file.length,
+        }
+    })
+
     /* Return success. */
     return {
         assetPkg,
         pinPkg,
-        unarchived,
+        archived,
         error,
     }
 })
