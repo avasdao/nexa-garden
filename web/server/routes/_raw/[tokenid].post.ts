@@ -147,7 +147,6 @@ export default defineEventHandler(async (event) => {
     let buckets
     let data
     let error
-    let filename
     let filesize
     let form
     let fullPath
@@ -177,10 +176,7 @@ export default defineEventHandler(async (event) => {
         const unzipped = fflate.unzipSync(fileContent)
         console.log('UNZIPPED', unzipped)
 
-        filename = tokenid + '.zip'
-        console.log('FILENAME', filename)
-
-        fullPath = process.env.IPFS_STAGING + filename
+        fullPath = process.env.IPFS_STAGING + tokenid
         console.log('FULL PATH', fullPath)
 
         success = fs.writeFileSync(fullPath, fileContent)
