@@ -75,7 +75,7 @@ const doPin = async (_tokenid, _data) => {
     let timeoutStart
     let wstream
 
-    /* Validate token id . */
+    /* Validate token id. */
     if (!_tokenid) {
         throw new Error('Oops! No token id provided.')
     }
@@ -137,9 +137,10 @@ console.log('looping...')
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
     let cid
+    let decompressed
     let error
     let fullPath
-    let profileid
+    let json
     let response
     let result
     let session
@@ -167,8 +168,8 @@ export default defineEventHandler(async (event) => {
     console.log('FILE CONTENT', fileContent, typeof fileContent, fileContent.length)
 
     try {
-        const unzipped = fflate.unzipSync(fileContent)
-        console.log('UNZIPPED', unzipped)
+        decompressed = fflate.unzipSync(fileContent)
+        console.log('DECOMPRESSED', decompressed)
 
         fullPath = process.env.IPFS_STAGING + tokenid
         console.log('FULL PATH', fullPath)
@@ -188,31 +189,47 @@ export default defineEventHandler(async (event) => {
         console.error(err)
     }
 
-    // TOOO Database inserts.
+    if (decompressed['info.json']) {
+        try {
+            json = JSON.parse(decompressed['info.json'])
+            console.log('JSON', json)
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
+    /* Validate JSON. */
+    if (!json) {
+        throw new Error('Oops! Failed to recognize the token description document (TDD).')
+    }
+
+    /* Build asset package. */
     const assetPkg = {
         _id: tokenid,
         tokenid: 'TBD',
         cid,
         shareid: 'TBD',
-        niftyVer: '2.0',
-        title: '',
-        series: '',
-        author: '',
-        keywords: [],
-        category: 'NFT',
-        appuri: '',
-        info: '',
-        data: {},
-        license: '',
+        niftyVer: json.niftyVer,
+        title: json.title,
+        series: json.series,
+        author: json.author,
+        keywords: json.keywords,
+        category: json.category,
+        appuri: json.appuri,
+        info: json.info,
+        data: json.data,
+        license: json.license,
         createdAt: moment().unix(),
     }
+    console.log('ASSET PKG', assetPkg)
 
-    // response = await assetsDb
-    //     .put(assetPkg)
-    //     .catch(err => console.error(err))
-    // console.log('ASSETS RESPONSE', response)
+    /* Insert new asset. */
+    response = await assetsDb
+        .put(assetPkg)
+        .catch(err => console.error(err))
+    console.log('ASSETS RESPONSE', response)
 
+    /* Build (IPFS) pin package. */
     const pinPkg = {
         _id: cid,
         ownerid: true, // FOR DEV PURPOSES ONLY
@@ -227,9 +244,15 @@ export default defineEventHandler(async (event) => {
         expiresAt: 0
     }
 
-    response = await pinsDb.put(pinPkg)
+    /* Insert new (IPFS) pin. */
+    response = await pinsDb
+        .put(pinPkg)
         .catch(err => console.error(err))
     console.log('PINS RESPONSE', response)
 
-    return { ok: true }
+    /* Return success. */
+    return {
+        ok: true,
+        error,
+    }
 })
