@@ -182,8 +182,9 @@ export default defineEventHandler(async (event) => {
         success = await fs.writeFileSync(fullPath, fileContent)
         console.log('SUCCESS', success)
 
+        /* Validate success. */
         if (success) {
-            doPin(filename, fileContent)
+            doPin(tokenid, fileContent)
         }
     } catch (err) {
         console.error(err)
