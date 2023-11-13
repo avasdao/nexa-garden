@@ -4,6 +4,7 @@ import fs from 'fs'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { sha256 } from '@nexajs/crypto'
+import { binToHex } from '@nexajs/utils'
 
 /* Initialize databases. */
 const assetsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/assets`)
@@ -169,7 +170,7 @@ export default defineEventHandler(async (event) => {
     console.log('FILE CONTENT', fileContent, typeof fileContent, fileContent.length)
 
     checksum = sha256(sha256(fileContent))
-    console.log('CHECKSUM', checksum)
+    console.log('CHECKSUM', binToHex(checksum))
 
     try {
         decompressed = fflate.unzipSync(fileContent)
@@ -201,11 +202,11 @@ export default defineEventHandler(async (event) => {
 
             /* Decode info document (bytes). */
             info = utf8decoder.decode(decompressed['info.json'])
-            console.log('INFO', info, typeof info)
+            // console.log('INFO', info, typeof info)
 
             /* Parse JSON. */
             json = JSON.parse(info)
-            console.log('JSON', json)
+            // console.log('JSON', json)
         } catch (err) {
             console.error(err)
         }
@@ -240,7 +241,7 @@ export default defineEventHandler(async (event) => {
     response = await assetsDb
         .put(assetPkg)
         .catch(err => console.error(err))
-    console.log('ASSETS RESPONSE', response)
+    // console.log('ASSETS RESPONSE', response)
 
     /* Build (IPFS) pin package. */
     const pinPkg = {
@@ -261,11 +262,12 @@ export default defineEventHandler(async (event) => {
     response = await pinsDb
         .put(pinPkg)
         .catch(err => console.error(err))
-    console.log('PINS RESPONSE', response)
+    // console.log('PINS RESPONSE', response)
 
     /* Return success. */
     return {
-        ok: true,
+        assetPkg,
+        pinPkg,
         error,
     }
 })
