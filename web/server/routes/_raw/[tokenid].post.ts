@@ -79,7 +79,7 @@ const doPin = async (_tokenid, _data) => {
 
     /* Validate token id. */
     if (!_tokenid) {
-        return 'Oops! No token id provided.'
+        throw new Error('Oops! No token id provided.')
     }
 
     pipePath = '/gateway/pipe'
@@ -164,7 +164,8 @@ export default defineEventHandler(async (event) => {
 
     /* Validate collection. */
     if (!approvedCollections.includes(tokenid.slice(0, 64))) {
-        return `Oops! This collection is NOT supported on this platform.`
+        setResponseStatus(event, 401)
+        return 'Oops! This collection is NOT supported on this platform.'
     }
 
     /* Request file content. */
@@ -177,6 +178,7 @@ export default defineEventHandler(async (event) => {
 
     /* Validate checksum. */
     if (tokenid.slice(-64) !== binToHex(checksum)) {
+        setResponseStatus(event, 400)
         return 'Oops! This asset failed CHECKSUM validation.'
     }
 
@@ -187,6 +189,7 @@ export default defineEventHandler(async (event) => {
 
     /* Validate token details. */
     if (!chainInfo) {
+        setResponseStatus(event, 400)
         return 'Oops! No blockchain data is available for this asset.'
     }
 
@@ -236,6 +239,7 @@ export default defineEventHandler(async (event) => {
 
     /* Validate JSON. */
     if (!json) {
+        setResponseStatus(event, 400)
         return 'Oops! Failed to recognize the token description document (TDD).'
     }
 
