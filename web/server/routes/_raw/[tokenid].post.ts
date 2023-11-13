@@ -179,7 +179,7 @@ export default defineEventHandler(async (event) => {
         fullPath = process.env.IPFS_STAGING + tokenid
         console.log('FULL PATH', fullPath)
 
-        success = fs.writeFileSync(fullPath, fileContent)
+        success = await fs.writeFileSync(fullPath, fileContent)
         console.log('SUCCESS', success)
 
         if (success) {
