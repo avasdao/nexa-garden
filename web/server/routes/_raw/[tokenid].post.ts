@@ -79,7 +79,7 @@ const doPin = async (_tokenid, _data) => {
 
     /* Validate token id. */
     if (!_tokenid) {
-        throw new Error('Oops! No token id provided.')
+        return 'Oops! No token id provided.'
     }
 
     pipePath = '/gateway/pipe'
@@ -177,7 +177,7 @@ export default defineEventHandler(async (event) => {
 
     /* Validate checksum. */
     if (tokenid.slice(-64) !== binToHex(checksum)) {
-        throw new Error('Oops! This asset failed CHECKSUM validation.')
+        return 'Oops! This asset failed CHECKSUM validation.'
     }
 
     /* Request (real-time) on-chain token details. */
@@ -187,7 +187,7 @@ export default defineEventHandler(async (event) => {
 
     /* Validate token details. */
     if (!chainInfo) {
-        throw new Error('Oops! No blockchain data is available for this asset.')
+        return 'Oops! No blockchain data is available for this asset.'
     }
 
     try {
@@ -236,7 +236,7 @@ export default defineEventHandler(async (event) => {
 
     /* Validate JSON. */
     if (!json) {
-        throw new Error('Oops! Failed to recognize the token description document (TDD).')
+        return 'Oops! Failed to recognize the token description document (TDD).'
     }
 
     /* Build asset package. */
