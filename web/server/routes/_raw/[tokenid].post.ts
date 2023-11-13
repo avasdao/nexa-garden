@@ -158,7 +158,7 @@ export default defineEventHandler(async (event) => {
     tokenid = event.context.params.tokenid
 
     /* Validate collection. */
-    if (!approvedCollections.includes(approvedCollections)) {
+    if (!approvedCollections.includes(tokenid.slice(0, 64))) {
         return `Oops! This collection is NOT supported on this platform.`
     }
 

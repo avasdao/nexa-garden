@@ -93,7 +93,6 @@ const init = async () => {
 
         // TODO Add social media poster.
     })
-console.log('DECOMPRESSED', decompressed)
 
     if (decompressed['public.png']) {
         /* Decompress archive data. */
