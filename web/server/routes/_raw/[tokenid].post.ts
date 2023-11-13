@@ -185,6 +185,11 @@ export default defineEventHandler(async (event) => {
         .catch(err => console.error(err))
     console.log('CHAIN INFO', chainInfo)
 
+    /* Validate token details. */
+    if (!chainInfo) {
+        throw new Error('Oops! No blockchain data is available for this asset.')
+    }
+
     try {
         /* Decompress the data. */
         unarchived = fflate.unzipSync(fileContent)
@@ -293,7 +298,7 @@ export default defineEventHandler(async (event) => {
         /* Add (info) to archived. */
         archived[_filename] = {
             id: binToHex(sha256(sha256(file))),
-            length: file.length,
+            filesize: file.length,
         }
     })
 
