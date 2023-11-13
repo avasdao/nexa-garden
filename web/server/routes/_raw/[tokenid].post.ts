@@ -104,7 +104,7 @@ const doPin = async (_tokenid, _data) => {
         timeoutStart = Date.now()
 
         const myLoop = setInterval(() => {
-console.log('looping...')
+// console.log('looping...')
             if (Date.now() - timeoutStart > timeout) {
                 clearInterval(myLoop)
 
@@ -170,11 +170,11 @@ export default defineEventHandler(async (event) => {
 
     /* Request file content. */
     fileContent = await readFile(req)
-    console.log('FILE CONTENT', fileContent, typeof fileContent, fileContent.length)
+    // console.log('FILE CONTENT', fileContent, typeof fileContent, fileContent.length)
 
     /* Calculate checksum. */
     checksum = sha256(sha256(fileContent))
-    console.log('CHECKSUM', binToHex(checksum))
+    // console.log('CHECKSUM', binToHex(checksum))
 
     /* Validate checksum. */
     if (tokenid.slice(-64) !== binToHex(checksum)) {
@@ -185,7 +185,7 @@ export default defineEventHandler(async (event) => {
     /* Request (real-time) on-chain token details. */
     chainInfo = await getTokenInfo(tokenid)
         .catch(err => console.error(err))
-    console.log('CHAIN INFO', chainInfo)
+    // console.log('CHAIN INFO', chainInfo)
 
     /* Validate token details. */
     if (!chainInfo) {
