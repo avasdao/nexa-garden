@@ -136,9 +136,11 @@ console.log('looping...')
 
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
+    let checksum
     let cid
     let decompressed
     let error
+    let fileContent
     let fullPath
     let info
     let json
@@ -163,8 +165,11 @@ export default defineEventHandler(async (event) => {
     }
 
     /* Request file content. */
-    const fileContent = await readFile(req)
+    fileContent = await readFile(req)
     console.log('FILE CONTENT', fileContent, typeof fileContent, fileContent.length)
+
+    checksum = sha256(sha256(fileContent))
+    console.log('CHECKSUM', checksum)
 
     try {
         decompressed = fflate.unzipSync(fileContent)
