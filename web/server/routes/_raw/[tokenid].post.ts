@@ -191,9 +191,14 @@ export default defineEventHandler(async (event) => {
     /* Validate token (JSON) document. */
     if (decompressed['info.json']) {
         try {
-            info = decompressed['info.json'].toString()
+            /* Initialize text decoder. */
+            const utf8decoder = new TextDecoder()
+
+            /* Decode info document (bytes). */
+            info = utf8decoder.decode(decompressed['info.json'])
             console.log('INFO', info, typeof info)
 
+            /* Parse JSON. */
             json = JSON.parse(info)
             console.log('JSON', json)
         } catch (err) {
