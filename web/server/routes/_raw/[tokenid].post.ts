@@ -140,11 +140,10 @@ export default defineEventHandler(async (event) => {
     let decompressed
     let error
     let fullPath
+    let info
     let json
     let response
     let result
-    let session
-    let sessionid
     let tokenid
 
     const approvedCollections = [
@@ -189,9 +188,13 @@ export default defineEventHandler(async (event) => {
         console.error(err)
     }
 
+    /* Validate token (JSON) document. */
     if (decompressed['info.json']) {
         try {
-            json = JSON.parse(decompressed['info.json'].toString())
+            info = decompressed['info.json'].toString()
+            console.log('INFO', info, typeof info)
+
+            json = JSON.parse(info)
             console.log('JSON', json)
         } catch (err) {
             console.error(err)
