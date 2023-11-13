@@ -6,8 +6,8 @@ import PouchDB from 'pouchdb'
 import { sha256 } from '@nexajs/crypto'
 
 /* Initialize databases. */
-const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
-const profilesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/profiles`)
+const assetsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/assets`)
+const pinsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/pins`)
 const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/sessions`)
 
 // function convertUint8ArrayToBinaryString(u8Array) {
@@ -136,18 +136,9 @@ console.log('looping...')
 
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
-    let availSpace
-    let body
-    let buckets
-    let data
+    let cid
     let error
-    let filesize
-    let form
     let fullPath
-    let metadata
-    let options
-    let pinned
-    let profile
     let profileid
     let response
     let result
@@ -179,28 +170,56 @@ export default defineEventHandler(async (event) => {
         result = await doPin(tokenid, fileContent)
         console.log('PIN RESULT', result)
 
-        // TOOO Database inserts.
-
+        if (result && typeof result === 'string' && result[0] === 'b') {
+            /* Set content id (CID). */
+            cid = result
+        }
     } catch (err) {
         console.error(err)
     }
 
+    // TOOO Database inserts.
+
+    const assetPkg = {
+        _id: tokenid,
+        tokenid: 'TBD',
+        cid,
+        shareid: 'TBD',
+        niftyVer: '2.0',
+        title: '',
+        series: '',
+        author: '',
+        keywords: [],
+        category: 'NFT',
+        appuri: '',
+        info: '',
+        data: {},
+        license: '',
+        createdAt: moment().unix(),
+    }
+
+    // response = assetsDb
+    //     .put(assetPkg)
+    //     .catch(err => console.error(err))
+    // console.log('ASSETS RESPONSE', response)
+
+    const pinPkg = {
+        _id: cid,
+        ownerid: null,
+        size: 0,
+        filepath: `/export/${tokenid}`,
+        newFilename: tokenid,
+        mimetype: 'application/zip',
+        // mtime: "2023-09-24T22:17:04.301Z",
+        originalFilename: tokenid,
+        createdAt: moment().unix(),
+        updatedAt: moment().unix(),
+        expiresAt: 0
+    }
+
+    response = pinsDb.put(pinPkg)
+        .catch(err => console.error(err))
+    console.log('PINS RESPONSE', response)
+
     return { ok: true }
-
-    /* Request session. */
-    // session = await sessionsDb
-    //     .get(sessionid)
-    //     .catch(err => {
-    //         console.error(err)
-    //         error = err
-    //     })
-    // console.log('SESSION', session)
-
-    /* Set profile id. */
-    // NOTE: This is typically a (33-byte) public key.
-    // profileid = session.profileid
-    // console.log('PROFILE ID', profileid)
-
-
-    return unzipped
 })
