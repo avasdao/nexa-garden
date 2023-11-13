@@ -291,7 +291,7 @@ export default defineEventHandler(async (event) => {
 
         /* Add (info) to archived. */
         archived[_filename] = {
-            id: sha256(sha256(file)),
+            id: binToHex(sha256(sha256(file))),
             length: file.length,
         }
     })
