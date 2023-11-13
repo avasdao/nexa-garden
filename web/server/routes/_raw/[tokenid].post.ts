@@ -1,5 +1,6 @@
 /* Import modules. */
 import * as fflate from 'fflate'
+import fs from 'fs'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { sha256 } from '@nexajs/crypto'

@@ -18,9 +18,9 @@ services:
       - COUCHDB_USER=${COUCHDB_USER}
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
       # - HELIA_DIR=/helia
-      - IPFS_STAGING=/export
+      - IPFS_STAGING={IPFS_STAGING}
       - MNEMONIC=${MNEMONIC}
-      - GATEWAY_PATH=/gateway
+      - GATEWAY_PATH={GATEWAY_PATH}
     volumes:
         # - ${HELIA_DIR}:/helia
         - ${IPFS_STAGING}:/export
