@@ -191,7 +191,7 @@ export default defineEventHandler(async (event) => {
 
     if (decompressed['info.json']) {
         try {
-            json = JSON.parse(decompressed['info.json'])
+            json = JSON.parse(decompressed['info.json'].toString())
             console.log('JSON', json)
         } catch (err) {
             console.error(err)
