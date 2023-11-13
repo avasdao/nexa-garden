@@ -4,6 +4,7 @@ import fs from 'fs'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { sha256 } from '@nexajs/crypto'
+import { getTokenInfo } from '@nexajs/rostrum'
 import { binToHex } from '@nexajs/utils'
 
 /* Initialize databases. */
@@ -137,9 +138,9 @@ console.log('looping...')
 
 export default defineEventHandler(async (event) => {
     /* Initialize locals. */
+    let chainInfo
     let checksum
     let cid
-    let decompressed
     let error
     let fileContent
     let fullPath
@@ -148,6 +149,7 @@ export default defineEventHandler(async (event) => {
     let response
     let result
     let tokenid
+    let unarchived
 
     const approvedCollections = [
         'cacf3d958161a925c28a970d3c40deec1a3fe06796fe1b4a7b68f377cdb90000', // NiftyArt
@@ -169,23 +171,38 @@ export default defineEventHandler(async (event) => {
     fileContent = await readFile(req)
     console.log('FILE CONTENT', fileContent, typeof fileContent, fileContent.length)
 
+    /* Calculate checksum. */
     checksum = sha256(sha256(fileContent))
     console.log('CHECKSUM', binToHex(checksum))
 
-    try {
-        decompressed = fflate.unzipSync(fileContent)
-        console.log('DECOMPRESSED', decompressed)
+    /* Validate checksum. */
+    if (tokenid.slice(-64) !== binToHex(checksum)) {
+        throw new Error('Oops! This asset failed CHECKSUM validation.')
+    }
 
+    /* Request (real-time) on-chain token details. */
+    chainInfo = await getTokenInfo(tokenid)
+        .catch(err => console.error(err))
+    console.log('CHAIN INFO', chainInfo)
+
+    try {
+        /* Decompress the data. */
+        unarchived = fflate.unzipSync(fileContent)
+        // console.log('UNARCHIVED', unarchived)
+
+        /* Set full path. */
         fullPath = process.env.IPFS_STAGING + tokenid
-        console.log('FULL PATH', fullPath)
+        // console.log('FULL PATH', fullPath)
 
         /* (Synchronous) file write. */
         fs.writeFileSync(fullPath, fileContent)
 
         /* Pin (save) to IPFS. */
         result = await doPin(tokenid, fileContent)
-        console.log('PIN RESULT', result)
+        // console.log('PIN RESULT', result)
 
+        /* Validate CID. */
+        // FIXME Perform a proper validation.
         if (result && typeof result === 'string' && result[0] === 'b') {
             /* Set content id (CID). */
             cid = result
@@ -195,13 +212,13 @@ export default defineEventHandler(async (event) => {
     }
 
     /* Validate token (JSON) document. */
-    if (decompressed['info.json']) {
+    if (unarchived['info.json']) {
         try {
             /* Initialize text decoder. */
             const utf8decoder = new TextDecoder()
 
             /* Decode info document (bytes). */
-            info = utf8decoder.decode(decompressed['info.json'])
+            info = utf8decoder.decode(unarchived['info.json'])
             // console.log('INFO', info, typeof info)
 
             /* Parse JSON. */
@@ -235,7 +252,7 @@ export default defineEventHandler(async (event) => {
         license: json.license,
         createdAt: moment().unix(),
     }
-    console.log('ASSET PKG', assetPkg)
+    // console.log('ASSET PKG', assetPkg)
 
     /* Insert new asset. */
     response = await assetsDb
@@ -268,6 +285,7 @@ export default defineEventHandler(async (event) => {
     return {
         assetPkg,
         pinPkg,
+        unarchived,
         error,
     }
 })
