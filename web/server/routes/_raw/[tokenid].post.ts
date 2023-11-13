@@ -290,7 +290,7 @@ export default defineEventHandler(async (event) => {
         const file = unarchived[_filename]
 
         /* Add (info) to archived. */
-        archived[filename] = {
+        archived[_filename] = {
             id: sha256(sha256(file)),
             length: file.length,
         }
