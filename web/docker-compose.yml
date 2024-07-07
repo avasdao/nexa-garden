@@ -1,11 +1,9 @@
-version: '3.7'
-
 services:
   app:
     build: .
     image: nexa-garden
     container_name: nexa-garden
-    restart: always
+    restart: unless-stopped
     network_mode: 'host'
     # ports:
     #   - '127.0.0.1:3000:3000'
@@ -27,7 +25,7 @@ services:
         - ${GATEWAY_PATH}:/gateway
   couchdb:
     image: couchdb
-    restart: always
+    restart: unless-stopped
     ports:
       - '127.0.0.1:5984:5984'
       - '127.0.0.1:4369:4369'
